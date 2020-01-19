@@ -39,6 +39,42 @@ const secondaryColor = {
 };
 
 const themeObject = {
+  typography: {
+    useNextVariants: true,
+    fontSize: 15,
+    fontWeightRegular: 400,
+    // Use the system font instead of the default Roboto font.
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
+    body1: {
+      fontSize: '1rem',
+    },
+    h2: {
+      fontSize: 50
+    },
+    h3: {
+      fontSize: 40
+    },
+    h4: {
+      fontSize: '28px'
+    },
+    h5: {
+      fontSize: '1.3rem'
+    },
+    h6: {
+      fontSize: '1rem'
+    }
+  },
   palette: {
     primary: primaryColor,
     secondary: {

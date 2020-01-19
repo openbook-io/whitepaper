@@ -24,6 +24,10 @@ const styles = (theme: Theme) => createStyles({
   },
   toolbar: {
     alignItems: 'center',
+  },
+  button: {
+    color: '#ffffff',
+    marginRight: '10px'
   }
 })
 

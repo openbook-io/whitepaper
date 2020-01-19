@@ -5,7 +5,8 @@ import {
   WithStyles,
   AppBar, 
   Toolbar, 
-  Grid
+  Grid,
+  Button
 } from '@material-ui/core';
 import Link from 'next/link';
 
@@ -25,6 +26,21 @@ function Header (props: Props) {
             </Grid>
           </a>
         </Link>
+        <div className={classes.links}>
+
+        </div>
+        <div>
+          <Link href="/login">
+            <Button color="primary" className={classes.button}>
+              Log In
+            </Button>
+          </Link>
+          <Link href="/register">
+            <Button color="secondary" variant="contained">
+              Register
+            </Button>
+          </Link>
+        </div>
       </Toolbar>
     </AppBar>
   )
