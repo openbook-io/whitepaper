@@ -1,13 +1,6 @@
-import { createStyles } from '@material-ui/core/styles';
+import { createStyles, Theme } from '@material-ui/core/styles';
 
-const styles = (theme) => createStyles({
-  root: {
-    display: 'flex',
-  },
-  content: {
-    flexGrow: 1,
-    width: '100%'
-  },
+const styles = (theme: Theme) => createStyles({
   toolbar: {
     ...theme.mixins.toolbar
   }

@@ -19,4 +19,4 @@ function Layout ({classes, children}: Props) {
   )
 }
 
-export default withStyles(style)(Layout);
+export default withStyles(style, {withTheme: true})(Layout);
