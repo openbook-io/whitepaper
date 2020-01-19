@@ -4,13 +4,50 @@ import Shadow from './shadows';
 
 const shadow:any = Shadow
 
+const primaryColor = {
+  50: '#e6eefa',
+  100: '#c1d4f3',
+  200: '#98b8ec',
+  300: '#6e9ce4',
+  400: '#4f86de',
+  500: '#3071d8',
+  600: '#2b69d4',
+  700: '#245ece',
+  800: '#1e54c8',
+  900: '#1342bf',
+  A100: '#eff3ff',
+  A200: '#bcccff',
+  A400: '#89a5ff',
+  A700: '#6f91ff',
+};
+
+const secondaryColor = {
+  50: '#e4f6eb',
+  100: '#bce9cc',
+  200: '#90daaa',
+  300: '#63cb88',
+  400: '#41c06f',
+  500: '#20b555',
+  600: '#1cae4e',
+  700: '#18a544',
+  800: '#139d3b',
+  900: '#0b8d2a',
+  A100: '#bdffc9',
+  A200: '#8affa0',
+  A400: '#57ff77',
+  A700: '#3dff63',
+};
+
 const themeObject = {
   palette: {
-    primary: {
-      main: '#25304c',
-    },
+    primary: primaryColor,
     secondary: {
-      main: '#00B0FF',
+      ...secondaryColor,
+      ...{
+        light: secondaryColor[300],
+        main: secondaryColor[500],
+        dark: secondaryColor[700]
+      },
       contrastText: '#ffffff'
     },
     error: {

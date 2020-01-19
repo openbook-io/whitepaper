@@ -8,6 +8,12 @@ export default class MyDocument extends Document {
     return (
       <html lang="en">
         <Head>
+          <link rel='shortcut icon' href='/favicon.ico' type='image/x-icon' />
+          <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+          <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
+          <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
+          <link rel="manifest" href="/site.webmanifest" />
+          <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
           {/* PWA primary color */}
           <meta name="theme-color" content={theme.palette.primary.main} />
           <link

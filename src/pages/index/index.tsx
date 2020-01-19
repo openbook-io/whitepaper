@@ -1,7 +1,9 @@
-import Button from '@material-ui/core/Button';
+import { Hero } from '../../components/page-elements';
 
 function HomePage() {
-  return (<div>Welcome to Next.js! <Button color="primary" variant="contained">Test</Button></div>)
+  return (<div>
+    <Hero />
+  </div>)
 }
 
 export default HomePage
