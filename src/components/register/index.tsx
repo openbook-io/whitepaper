@@ -1,11 +1,23 @@
 import { useState } from 'react';
 import style from './style';
-import { WithStyles, withStyles, Button, Paper, Grid, CircularProgress, FormControl, FormHelperText, Input, InputLabel } from '@material-ui/core';
+import { 
+  WithStyles, 
+  withStyles, 
+  Button, 
+  Paper, 
+  Grid, 
+  CircularProgress, 
+  FormControl, 
+  FormControlLabel,
+  Checkbox,
+  FormHelperText, 
+  Input, 
+  InputLabel 
+} from '@material-ui/core';
 import { useMutation } from '@apollo/react-hooks';
-//import { SIGNUP_MUTATION, SIGNUP_MUTATIONVariables } from '../../queries/types/SIGNUP_MUTATION'
 import errorFormatting from '../../utils/errorFormatting'
 import { setCookie } from 'nookies'
-import { SIGNUP_MUTATION_QUERY } from '../../queries/register';
+import { SIGNUP_MUTATION } from '../../queries/register';
 import { CURRENT_USER } from '../../queries/user';
 
 import Router from 'next/router';
@@ -18,14 +30,16 @@ function Register (props: Props) {
     email: '',
     firstName: '',
     lastName: '',
-    password: ''
+    username: '',
+    password: '',
+    newsletter: false
   });
 
-  const { email, firstName, lastName, password } = values
+  const { email, firstName, lastName, username, password, newsletter } = values
 
   const [register, {error, loading}] = useMutation(
-    SIGNUP_MUTATION_QUERY, {
-      variables: {data: { email, firstName, lastName, password }},
+    SIGNUP_MUTATION, {
+      variables: {data: { email, firstName, lastName, username, password, newsletter }},
       update: async (store, {data}) => {
         setCookie({}, 'token', data.register.token, {
           maxAge: 30 * 24 * 60 * 60,
@@ -42,6 +56,13 @@ function Register (props: Props) {
   const handleChange = (name: string) => (event: any) => {
     setValues({ ...values, [name]: event.target.value });
   };
+
+  const saveCheckbox = (e) => {
+    setValues({ 
+      ...values,
+      newsletter: e.target.checked 
+    });
+  }
 
   const validationErrors = errorFormatting(error);
 
@@ -83,6 +104,16 @@ function Register (props: Props) {
               </FormControl>
             </Grid>
           </Grid>
+          <FormControl fullWidth error={validationErrors.hasOwnProperty('username')} className={classes.formControl}>
+            <InputLabel>Username*</InputLabel>
+            <Input
+              placeholder="johndoe"
+              required
+              value={values.username}
+              onChange={handleChange('username')}
+            />
+            {validationErrors.hasOwnProperty('username') && <FormHelperText>{validationErrors['username']}</FormHelperText>}
+          </FormControl>
           <FormControl fullWidth error={validationErrors.hasOwnProperty('email')} className={classes.formControl}>
             <InputLabel>Email*</InputLabel>
             <Input
@@ -104,8 +135,11 @@ function Register (props: Props) {
             />
             {validationErrors.hasOwnProperty('password') && <FormHelperText>{validationErrors['password']}</FormHelperText>}
           </FormControl>
+          <FormControl fullWidth className={classes.formControl}>
+            <FormControlLabel control={<Checkbox name="newsletter" onChange={saveCheckbox} color="primary" />} label="Sign me up for the newsletter"/>
+          </FormControl>
           {loading && <CircularProgress className={classes.loading} size={30} />}
-          <Button className={classes.button} variant="contained" color="primary" type="submit">Register</Button>
+          <Button className={classes.button} variant="contained" color="secondary" type="submit">Register</Button>
         </Paper>
       </form>
     </div>
