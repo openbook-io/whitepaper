@@ -6,6 +6,8 @@ import errorFormatting from '../../utils/errorFormatting'
 import { setCookie } from 'nookies'
 import { CURRENT_USER } from '../../queries/user';
 import { LOGIN } from '../../queries/login';
+import Link from 'next/link';
+
 import Router from 'next/router';
 
 interface Props extends WithStyles<typeof style> {}
@@ -78,6 +80,9 @@ function Login (props: Props) {
           {loading && <CircularProgress className={classes.loading} size={30} />}
           <Button className={classes.button} variant="contained" color="secondary" type="submit">Login</Button>
         </Paper>
+        <div className={classes.switchToLink}>
+          <Link href="/forgot-password">Forgot password?</Link>
+        </div>
       </form>
     </div>
   );

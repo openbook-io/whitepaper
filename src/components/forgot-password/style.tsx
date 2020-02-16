@@ -31,11 +31,6 @@ const styles = (theme: Theme) => createStyles({
     color: '#ff1744',
     padding: 10,
     marginBottom: 20
-  },
-  switchToLink: {
-    marginTop: 20,
-    textAlign: 'center',
-    color: '#999'
   }
 })
 

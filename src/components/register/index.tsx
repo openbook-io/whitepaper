@@ -19,6 +19,7 @@ import errorFormatting from '../../utils/errorFormatting'
 import { setCookie } from 'nookies'
 import { SIGNUP_MUTATION } from '../../queries/register';
 import { CURRENT_USER } from '../../queries/user';
+import Link from 'next/link';
 
 import Router from 'next/router';
 
@@ -141,6 +142,9 @@ function Register (props: Props) {
           {loading && <CircularProgress className={classes.loading} size={30} />}
           <Button className={classes.button} variant="contained" color="secondary" type="submit">Register</Button>
         </Paper>
+        <div className={classes.switchToLink}>
+          Already a member? <Link href="/login">Sign In</Link>
+        </div>
       </form>
     </div>
   );

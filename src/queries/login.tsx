@@ -14,6 +14,13 @@ const LOGIN = gql`
   ${USER_FRAGMENT}
 `;
 
+const FORGOT_PASSWORD = gql`
+  mutation FORGOT_PASSWORD_MUTATION($data: ForgotPasswordInput!) {
+    sendRecoveryEmail(data: $data)
+  }
+`;
+
 export { 
-  LOGIN
+  LOGIN,
+  FORGOT_PASSWORD
 };

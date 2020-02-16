@@ -24,6 +24,11 @@ const styles = (theme: Theme) => createStyles({
     position: 'absolute',
     right: 25,
     bottom: 25
+  },
+  switchToLink: {
+    marginTop: 20,
+    textAlign: 'center',
+    color: '#999'
   }
 })
 
