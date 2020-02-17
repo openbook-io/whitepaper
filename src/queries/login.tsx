@@ -20,7 +20,14 @@ const FORGOT_PASSWORD = gql`
   }
 `;
 
+const CHANGE_PASSWORD = gql`
+  mutation CHANGE_PASSWORD_MUTATION($data: ChangePasswordInput!) {
+    changePassword(data: $data)
+  }
+`;
+
 export { 
   LOGIN,
-  FORGOT_PASSWORD
+  FORGOT_PASSWORD,
+  CHANGE_PASSWORD
 };
