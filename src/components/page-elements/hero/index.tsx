@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Link from 'next/link';
 import style from './style';
+import LoggedIn from '../../loggedIn';
 
 interface Props extends WithStyles<typeof style> {}
 
@@ -16,9 +17,11 @@ function Hero (props: Props) {
       <Grid item className={classes.text}>
         <Typography className={classes.title} variant="h2" component="h1">Better investments with whitepaper.io</Typography>
         <Typography className={classes.subtitle} variant="h4" component="h2">Analyse whitepapers with other experts</Typography>
-        <Link href='/register'>
-          <Button size="large" variant="contained" color="secondary">Register Now</Button>
-        </Link>
+        <LoggedIn dontShow>
+          <Link href='/register'>
+            <Button size="large" variant="contained" color="secondary">Register Now</Button>
+          </Link>
+        </LoggedIn>
       </Grid>
     </Grid>
   );

@@ -1753,6 +1753,17 @@ clone@^1.0.2:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/clone/-/clone-1.0.4.tgz#da309cc263df15994c688ca902179ca3c7cd7c7e"
 
+cloudinary-core@^2.7.4:
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/cloudinary-core/-/cloudinary-core-2.8.0.tgz#c3d2b633b613e5b2652169a89f8af0cbf20c3f59"
+
+cloudinary-react@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/cloudinary-react/-/cloudinary-react-1.3.0.tgz#7921144cd9ab96ef1ac8a8d3b5db263328550ca7"
+  dependencies:
+    cloudinary-core "^2.7.4"
+    prop-types "^15.6.2"
+
 clsx@^1.0.2:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/clsx/-/clsx-1.0.4.tgz#0c0171f6d5cb2fe83848463c15fcc26b4df8c2ec"

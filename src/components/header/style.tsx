@@ -28,7 +28,16 @@ const styles = (theme: Theme) => createStyles({
   button: {
     color: '#ffffff',
     marginRight: '10px'
-  }
+  },
+  image: {
+    width: 42,
+    height: 42,
+    objectFit: 'cover',
+    backgroundColor: '#fff',
+    borderRadius: '50%',
+    display: 'block',
+    border: '2px solid #fff'
+  },
 })
 
 export default styles
