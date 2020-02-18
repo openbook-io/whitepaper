@@ -1,4 +1,4 @@
-const shadows = [
+const shadows:any = [
   'none',
   '0 0 0 1px rgba(63,63,68,.05), 0 1px 1px 0 rgba(63,63,68,.15)',
   '0 0 0 1px rgba(63,63,68,.05), 0 1px 3px 0 rgba(63,63,68,.15)',

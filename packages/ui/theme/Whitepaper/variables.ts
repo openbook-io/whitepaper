@@ -2,7 +2,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { red } from '@material-ui/core/colors';
 import Shadow from './shadows';
 
-const shadow:any = Shadow
+const shadow = Shadow
 
 const primaryColor = {
   50: '#e6eefa',

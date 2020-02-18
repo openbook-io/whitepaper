@@ -6,12 +6,12 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { CloudinaryContext } from 'cloudinary-react';
 import Layout from '../components/layout';
-import theme from '../theme';
+import {theme} from '@whitepaper/ui';
 import withApolloClient from '../lib/with-apollo-client';
-import getConfig from 'next/config';
+import getConfig from 'next/config'
 
-const {publicRuntimeConfig} = getConfig();
-const {cloudinaryCloudName} = publicRuntimeConfig;
+const {publicRuntimeConfig} = getConfig()
+const {cloudinaryCloudName} = publicRuntimeConfig
 
 interface Props extends AppContext {
   apolloClient: any

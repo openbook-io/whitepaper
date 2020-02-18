@@ -1,32 +1,25 @@
 {
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "dev": "nodemon",
-    "build": "next build && tsc --project tsconfig.server.json",
-    "heroku-postbuild": "next build && tsc --project tsconfig.server.json",
-    "start": "node dist/index.js",
-    "type-check": "tsc"
+    "main-dev": "nodemon",
+    "organization-dev": "yarn workspace @whitepaper/organization dev",
+    "build": "yarn --cwd packages/main build",
+    "start": "yarn --cwd packages/main start"
   },
   "dependencies": {
-    "@apollo/react-hooks": "^3.1.3",
-    "@apollo/react-ssr": "^3.1.3",
-    "@material-ui/core": "^4.8.3",
-    "@material-ui/styles": "^4.8.2",
-    "apollo-boost": "^0.4.7",
-    "apollo-upload-client": "^12.1.0",
-    "cloudinary-react": "^1.3.0",
-    "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "graphql": "^14.6.0",
-    "graphql-tag": "^2.10.1",
-    "isomorphic-unfetch": "^3.0.0",
+    "http-proxy-middleware": "^0.21.0",
     "next": "^9.2.0",
-    "nookies": "^2.0.8",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "vhost": "^3.0.2"
+  },
+  "resolutions": {
+    "react-dev-utils": "10.0.0"
   },
   "devDependencies": {
     "@types/node": "^13.1.8",
-    "@types/webpack-env": "^1.15.0",
     "ts-node": "^8.6.2",
     "typescript": "^3.7.5"
   }

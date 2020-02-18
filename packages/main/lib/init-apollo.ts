@@ -10,6 +10,8 @@ const {openbookGraphqlUrl} = publicRuntimeConfig
 
 let apolloClient = null;
 
+console.log(openbookGraphqlUrl)
+
 function parseCookies (headers, options = {}) {
   const documentCookie = process.browser ? document.cookie : '';
   return cookie.parse(process.browser ? documentCookie : headers.cookie || '', options)
