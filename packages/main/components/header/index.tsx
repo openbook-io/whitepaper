@@ -8,13 +8,17 @@ import {
   Grid,
   Button,
   IconButton,
-  Menu,
-  MenuItem
+  MenuItem,
+  Popper,
+  Grow,
+  Paper,
+  ClickAwayListener,
+  MenuList
 } from '@material-ui/core';
 import Link from 'next/link';
 import LoggedIn from '../loggedIn';
 import Router from 'next/router';
-import { useQuery, useApolloClient } from '@apollo/react-hooks';
+import { useApolloClient } from '@apollo/react-hooks';
 import { destroyCookie } from 'nookies';
 import MyAvatar from '../my-avatar'
 
@@ -23,18 +27,23 @@ interface Props extends WithStyles<typeof style> {}
 function Header (props: Props) {
   const { classes } = props;
   const client = useApolloClient();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [open, setOpen] = React.useState(false);
+  const anchorRef = React.useRef(null);
 
-  const handleClick = event => {
-    setAnchorEl(event.currentTarget);
+  const handleToggle = () => {
+    setOpen(prevOpen => !prevOpen);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
+  const handleClose = event => {
+    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+      return;
+    }
+
+    setOpen(false);
   };
 
   const handleLogout = () => {
-    setAnchorEl(null);
+    setOpen(false);
     destroyCookie({}, 'token');
     client.resetStore();
     Router.push('/');
@@ -56,20 +65,29 @@ function Header (props: Props) {
         </div>
         <div>
           <LoggedIn>
-            <IconButton aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+            <IconButton ref={anchorRef} aria-controls={open ? 'menu-list-grow' : undefined} aria-haspopup="true" onClick={handleToggle}>
               <MyAvatar className={classes.image} size="80" />
             </IconButton>
           </LoggedIn>
-          <Menu
-            id="simple-menu"
-            anchorEl={anchorEl}
-            keepMounted
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
-          >
-            <MenuItem onClick={() => {handleClose(); Router.push('/profile');}}>Profile</MenuItem>
-            <MenuItem onClick={handleLogout}>Logout</MenuItem>
-          </Menu>
+          <Popper open={open} anchorEl={anchorRef.current} placement="bottom-end" role={undefined} transition disablePortal>
+          {({ TransitionProps, placement }) => (
+            <Grow
+              {...TransitionProps}
+              style={{ transformOrigin: 'center top' }}
+            >
+              <Paper>
+                <ClickAwayListener onClickAway={handleClose}>
+                  <MenuList autoFocusItem={open} id="menu-list-grow">
+                    <MenuItem onClick={(event) => {handleClose(event); Router.push('/edit-profile');}}>Edit Profile</MenuItem>
+                    <MenuItem onClick={(event) => {handleClose(event); Router.push('/my-organizations');}}>My Organizations</MenuItem>
+                    <MenuItem onClick={(event) => {handleClose(event); Router.push('/settings');}}>Settings</MenuItem>
+                    <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                  </MenuList>
+                </ClickAwayListener>
+              </Paper>
+            </Grow>
+          )}
+        </Popper>
           <LoggedIn dontShow>
             <Link href="/login">
               <Button color="primary" className={classes.button}>
