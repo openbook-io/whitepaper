@@ -19,7 +19,9 @@ function MyOrganizations (props: Props) {
             <h1>Your Organizations</h1>
           </Grid>
           <Grid item>
-            <Button color="primary" variant="contained">Create Organization</Button>
+            <Link href="/create-organization">
+              <Button color="primary" variant="contained">Create Organization</Button>
+            </Link>
           </Grid>
         </Grid>
         
