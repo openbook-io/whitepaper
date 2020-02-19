@@ -24,7 +24,8 @@
     "next-transpile-modules": "^3.0.0",
     "nookies": "^2.0.8",
     "react": "^16.8.3",
-    "react-dom": "^16.8.3"
+    "react-dom": "^16.8.3",
+    "react-truncate-markup": "^4.1.0"
   },
   "license": "ISC",
   "devDependencies": {
