@@ -11,11 +11,13 @@ import {
 import style from './style';
 import { Link } from '@reach/router';
 import { Avatar } from '@whitepaper/ui';
+import { useOrganization } from '../../utils/organizationContext';
 
 interface Props extends WithStyles<typeof style> {}
 
 function Header (props: Props) {
   const { classes } = props;
+  const organization = useOrganization();
 
   return (
     <AppBar position="fixed" className={classes.appBar}>
@@ -30,7 +32,7 @@ function Header (props: Props) {
           </Grid>
         </Grid>
         <Typography variant="h5" color="inherit" className={classes.title}>
-          Test
+          {organization.name}
         </Typography>
         {/*<Avatar className={classes.avatarRight} user={me} /> */}
       </Toolbar>

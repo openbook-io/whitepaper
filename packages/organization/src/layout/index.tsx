@@ -1,18 +1,19 @@
 import React from 'react';
 import { Router } from '@reach/router';
 import Home from '../containers/home';
+import MyCoins from '../containers/my-coins';
 import Sidebar from '../components/sidebar';
 import Header from '../components/header';
 import MainError from '../components/main-error';
 import MainLoader from '../components/main-loader';
 import { 
   withStyles, 
-  WithStyles,
-  CircularProgress
+  WithStyles
 } from '@material-ui/core';
 import style from './style';
 import { MY_CURRENT_ORGANIZATION } from '../queries/organization';
 import { useQuery } from '@apollo/react-hooks';
+import { OrganizationProvider } from '../utils/organizationContext';
 
 interface Props extends WithStyles<typeof style> {}
 
@@ -24,16 +25,19 @@ function Layout(props: Props) {
     <div>
       { !loading && !error && 
         <React.Fragment>
-          <Header />
-          <Sidebar />
-          <div className={classes.toolbar} />
-          <main className={classes.content}>
-            <div className={classes.container}>
-              <Router>
-                <Home path="/" />
-              </Router>
-            </div>
-          </main>
+          <OrganizationProvider value={data.whatIsMyCurrentOrganization}>
+            <Header />
+            <Sidebar />
+            <div className={classes.toolbar} />
+            <main className={classes.content}>
+              <div className={classes.container}>
+                <Router>
+                  <Home path="/" />
+                  <MyCoins path="/my-coins" />
+                </Router>
+              </div>
+            </main>
+          </OrganizationProvider>
         </React.Fragment>
       }
       { !loading && error && 
