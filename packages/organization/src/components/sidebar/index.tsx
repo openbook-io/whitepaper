@@ -12,7 +12,7 @@ import style from './style';
 import clsx from 'clsx';
 import { Link } from '@reach/router';
 import Coins from 'mdi-react/CoinsIcon';
-import FileDocumentBoxMultipleOutline from 'mdi-react/FileDocumentBoxMultipleIcon';
+import FileDocumentBoxMultipleOutline from 'mdi-react/FileDocumentBoxMultipleOutlineIcon';
 
 interface Props extends WithStyles<typeof style> {}
 

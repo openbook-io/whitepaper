@@ -1,14 +1,12 @@
 import React from 'react';
-import {Button} from '@material-ui/core';
 import { RouteComponentProps } from '@reach/router';
+import NoDocumentsPlaceholder from '../../components/no-documents-placeholder';
 
 interface Props extends RouteComponentProps {}
 
 function Home(props: Props) {
   return (
-    <Button variant="contained" color="primary">
-      Hello World
-    </Button>
+    <NoDocumentsPlaceholder />
   )
 }
 
