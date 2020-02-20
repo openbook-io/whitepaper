@@ -7,8 +7,11 @@ import { setCookie } from 'nookies'
 import { CURRENT_USER } from '../../queries/user';
 import { LOGIN } from '../../queries/login';
 import Link from 'next/link';
-
 import Router from 'next/router';
+import getConfig from 'next/config'
+
+const {publicRuntimeConfig} = getConfig()
+const {cookieDomain} = publicRuntimeConfig
 
 interface Props extends WithStyles<typeof style> {}
 
@@ -27,7 +30,8 @@ function Login (props: Props) {
       update: async (store, {data}) => {
         setCookie({}, 'token', data.login.token, {
           maxAge: 30 * 24 * 60 * 60,
-          path: '/'
+          path: '/',
+          domain: cookieDomain
         })
 
         const currentUser:any = store.readQuery({ query: CURRENT_USER });

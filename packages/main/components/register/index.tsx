@@ -20,8 +20,11 @@ import { setCookie } from 'nookies'
 import { SIGNUP_MUTATION } from '../../queries/register';
 import { CURRENT_USER } from '../../queries/user';
 import Link from 'next/link';
-
 import Router from 'next/router';
+import getConfig from 'next/config'
+
+const {publicRuntimeConfig} = getConfig()
+const {cookieDomain} = publicRuntimeConfig
 
 interface Props extends WithStyles<typeof style> {}
 
@@ -44,7 +47,8 @@ function Register (props: Props) {
       update: async (store, {data}) => {
         setCookie({}, 'token', data.register.token, {
           maxAge: 30 * 24 * 60 * 60,
-          path: '/'
+          path: '/',
+          domain: cookieDomain
         })
 
         const currentUser:any = store.readQuery({ query: CURRENT_USER });

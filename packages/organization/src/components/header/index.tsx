@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { 
   withStyles, 
   WithStyles,
@@ -23,11 +23,9 @@ function Header (props: Props) {
         <Grid container justify="center" alignItems="center" className={classes.profile}>
           <Grid item>
           <Link to="/edit-profile">
-            <a>
-              <Tooltip title="Profile" placement="right">
-                <div className={classes.avatarLeft}><Avatar type="organization" size={42} /></div>
-              </Tooltip>
-            </a>
+            <Tooltip title="Profile" placement="right" arrow>
+              <div className={classes.avatarLeft}><Avatar type="organization" size={42} /></div>
+            </Tooltip>
           </Link>
           </Grid>
         </Grid>

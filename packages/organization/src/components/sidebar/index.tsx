@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { 
   withStyles, 
   WithStyles,
@@ -29,22 +29,18 @@ function Sidebar (props: Props) {
       </div>
       <List>
         <Link to="/">
-          <a>
-          <Tooltip title="My Documents" placement="right">
+          <Tooltip title="My Documents" placement="right" arrow>
             <ListItem className={classes.listItem} button>
               <ListItemIcon className={classes.listItemIcon}><FileDocumentBoxMultipleOutline /></ListItemIcon>
             </ListItem>
           </Tooltip>
-          </a>
         </Link>
         <Link to="/my-coins">
-          <a>
-          <Tooltip title="My Coins" placement="right">
+          <Tooltip title="My Coins" placement="right" arrow>
             <ListItem className={classes.listItem} button>
               <ListItemIcon className={classes.listItemIcon}><Coins /></ListItemIcon>
             </ListItem>
           </Tooltip>
-          </a>
         </Link>
       </List>
     </Drawer>

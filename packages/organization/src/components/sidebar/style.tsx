@@ -7,7 +7,7 @@ const styles = (theme: Theme) => createStyles({
     display: 'flex',
   },
   spacer: {
-    marginTop: 70
+    marginTop: 60
   },
   menuButton: {
     marginLeft: 12,
