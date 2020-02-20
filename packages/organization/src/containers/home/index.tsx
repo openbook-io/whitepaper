@@ -1,10 +1,10 @@
 import React from 'react';
 import {Button} from '@material-ui/core';
-import {theme} from '@whitepaper/ui';
+import { RouteComponentProps } from '@reach/router';
 
-console.log(theme);
+interface Props extends RouteComponentProps {}
 
-function App() {
+function Home(props: Props) {
   return (
     <Button variant="contained" color="primary">
       Hello World
@@ -12,4 +12,4 @@ function App() {
   )
 }
 
-export default App;
+export default Home;
