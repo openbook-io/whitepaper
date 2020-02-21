@@ -4,10 +4,10 @@ import NoDocumentsPlaceholder from '../../components/no-documents-placeholder';
 
 interface Props extends RouteComponentProps {}
 
-function Home(props: Props) {
+function HomePage(props: Props) {
   return (
     <NoDocumentsPlaceholder />
   )
 }
 
-export default Home;
+export default HomePage;

@@ -6,6 +6,7 @@ import {
   Typography
 } from '@material-ui/core';
 import style from './style'
+import { Link } from '@reach/router';
 
 interface Props extends WithStyles<typeof style> {}
 
@@ -21,9 +22,11 @@ function NoCoinsPlaceholder(props:  Props) {
       <Typography variant="body1" gutterBottom className={classes.text}>
         Your organization doesn't seem to have a cryptocurrency added to your account. Click the button below to add your cryptocurrency to your organization
       </Typography>
-      <Button variant="contained" color="primary" className={classes.button}>
-        Add Cryptocurrency
-      </Button>
+      <Link to="/add-coin">
+        <Button variant="contained" color="primary" className={classes.button}>
+          Add Cryptocurrency
+        </Button>
+      </Link>
     </div>
   );
 }
