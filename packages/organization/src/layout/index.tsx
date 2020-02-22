@@ -3,6 +3,7 @@ import { Router } from '@reach/router';
 import Home from '../containers/home';
 import MyCoins from '../containers/my-coins';
 import AddCoin from '../containers/add-coin';
+import EditCoin from '../containers/edit-coin';
 import Sidebar from '../components/sidebar';
 import Header from '../components/header';
 import MainError from '../components/main-error';
@@ -36,6 +37,7 @@ function Layout(props: Props) {
                   <Home path="/" />
                   <MyCoins path="/my-coins" />
                   <AddCoin path="/add-coin" />
+                  <EditCoin path="/edit-coin/:coinId" />
                 </Router>
               </div>
             </main>

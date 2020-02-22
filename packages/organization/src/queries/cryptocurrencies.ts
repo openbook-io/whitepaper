@@ -28,7 +28,18 @@ const MY_CRYPTOCURRENCIES = gql`
   ${CRYPTOCURRENCY_FRAGMENT}
 `;
 
+const MY_CRYPTOCURRENCY = gql`
+  query MY_CRYPTOCURRENCY_QUERY($id: ID!) {
+    myCryptocurrency(id: $id) {
+      ...CryptocurrencyFragment
+    }
+  }
+
+  ${CRYPTOCURRENCY_FRAGMENT}
+`;
+
 export { 
   CREATE_CRYPTOCURRENCY,
-  MY_CRYPTOCURRENCIES
+  MY_CRYPTOCURRENCIES,
+  MY_CRYPTOCURRENCY
 };
