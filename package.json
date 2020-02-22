@@ -6,9 +6,9 @@
   "scripts": {
     "main-dev": "nodemon",
     "organization-dev": "yarn workspace @whitepaper/organization dev",
-    "build": "yarn --cwd packages/main build",
-    "start": "yarn --cwd packages/main start",
-    "heroku-postbuild": "yarn --cwd packages/main build"
+    "build": "yarn --cwd packages/main build && tsc --project tsconfig.server.json",
+    "start": "node dist/index.js",
+    "heroku-postbuild": "yarn --cwd packages/main build && tsc --project tsconfig.server.json"
   },
   "dependencies": {
     "express": "^4.17.1",
