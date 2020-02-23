@@ -1562,6 +1562,10 @@
   version "4.0.30"
   resolved "https://registry.yarnpkg.com/@types/object-assign/-/object-assign-4.0.30.tgz#8949371d5a99f4381ee0f1df0a9b7a187e07e652"
 
+"@types/omit-empty@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@types/omit-empty/-/omit-empty-1.0.0.tgz#87aa562926d2ed317913739173cbc145422753b4"
+
 "@types/parse-json@^4.0.0":
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@types/parse-json/-/parse-json-4.0.0.tgz#2f8bb441434d163b35fb8ffdccd7138927ffb8c0"
@@ -7292,6 +7296,12 @@ object.values@^1.1.0:
 obuf@^1.0.0, obuf@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/obuf/-/obuf-1.1.2.tgz#09bea3343d41859ebd446292d11c9d4db619084e"
+
+omit-empty@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/omit-empty/-/omit-empty-1.0.0.tgz#827ad1fdc569511bb9fb3f038a9171a7f10d9040"
+  dependencies:
+    kind-of "^6.0.2"
 
 on-finished@~2.3.0:
   version "2.3.0"

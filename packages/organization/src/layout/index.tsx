@@ -4,6 +4,7 @@ import Home from '../containers/home';
 import MyCoins from '../containers/my-coins';
 import AddCoin from '../containers/add-coin';
 import EditCoin from '../containers/edit-coin';
+import EditProfile from '../containers/edit-profile';
 import Sidebar from '../components/sidebar';
 import Header from '../components/header';
 import MainError from '../components/main-error';
@@ -38,6 +39,7 @@ function Layout(props: Props) {
                   <MyCoins path="/my-coins" />
                   <AddCoin path="/add-coin" />
                   <EditCoin path="/edit-coin/:coinId" />
+                  <EditProfile path="/edit-profile" />
                 </Router>
               </div>
             </main>

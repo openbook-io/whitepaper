@@ -3,6 +3,8 @@ import React, {useContext} from 'react'
 type OrganizationProps = { 
   name: string;
   slug: string;
+  website: string;
+  about: string;
 };
 
 const OrganizationContext = React.createContext<Partial<OrganizationProps>>({})
