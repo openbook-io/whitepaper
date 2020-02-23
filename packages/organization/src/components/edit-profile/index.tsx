@@ -16,7 +16,7 @@ import { useMutation } from '@apollo/react-hooks';
 import { EDIT_ORGANIZATION } from '../../queries/organization';
 //import omitEmpty from 'omit-empty';
 import omitEmpty from '../../utils/omitEmpty';
-import { AssetsDialog } from '@whitepaper/ui';
+import { AssetsDialog, Avatar } from '@whitepaper/ui';
 
 interface Props extends WithStyles<typeof style> {
 }
@@ -56,7 +56,7 @@ function EditProfile (props: Props) {
     }}>
       <Card>
         <CardContent>
-          <h1 onClick={() => setDialogOpen(true)}>Click here</h1>
+          <Avatar className={classes.avatar} type="organization" size={120} onClick={() => setDialogOpen(true)} />
           <TextField
             className={classes.textField}
             fullWidth
@@ -87,6 +87,8 @@ function EditProfile (props: Props) {
             name="about"
             value={values.about}
             onChange={handleChangeText}
+            rows={3}
+            rowsMax={10}
           />
         </CardContent>
         <CardActions>
