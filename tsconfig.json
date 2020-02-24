@@ -14,11 +14,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "experimentalDecorators": true,
+    "noImplicitAny": false
   },
-  "exclude": ["node_modules"],
-  "include": [ 
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ]
+  "exclude": ["node_modules"]
 }

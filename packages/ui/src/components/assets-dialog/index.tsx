@@ -14,10 +14,15 @@ import CloseIcon from 'mdi-react/CloseIcon';
 import CloudUploadIcon from 'mdi-react/CloudUploadIcon';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import { TransitionProps } from '@material-ui/core/transitions';
+import { useMutation, useQuery } from '@apollo/react-hooks';
+import { GET_ASSETS, UPLOAD_ASSET } from '../../queries/assets';
+import { Image, Transformation } from 'cloudinary-react';
 
 interface Props extends WithStyles<typeof style> {
   open: boolean;
   onClose?: () => void;
+  type?: string;
+  onSelect: (asset) => void;
 }
 
 interface PropsTwo extends WithStyles<typeof style> {
@@ -45,11 +50,30 @@ const Transition = React.forwardRef(function Transition(props: TransitionProps, 
 });
 
 function AssetsDialog (props: Props) {
-  const { classes, open, onClose } = props;
+  const { classes, open, onClose, type, onSelect } = props;
   const uploadRef = useRef<HTMLInputElement>(null);
 
-  const onChangeFile = (event: ChangeEvent) => {
-    console.log(event);
+  const assets = useQuery(GET_ASSETS, {
+    variables: {
+      type
+    }
+  })
+
+  const [upload, uploadAssetInfo] = useMutation(
+    UPLOAD_ASSET
+  )
+
+  const onChangeFile = async (event) => {
+    event.stopPropagation();
+    event.preventDefault();
+
+    if(event.target.files.length) {
+      const file = event.target.files[0];
+ 
+      const result = await upload({
+        variables: {file: file, type: type}
+      });
+    }
   }
 
   const openFileSelector = () => {
@@ -71,7 +95,7 @@ function AssetsDialog (props: Props) {
         Choose Your Image
       </DialogTitle>
       <DialogContent className={classes.dialogContent}>
-        <Grid container spacing={4}>
+        <Grid container spacing={2}>
           <Grid item xs={4} className={classes.gridItem}>
             <input className={classes.fileInput} ref={uploadRef} type="file" onChange={onChangeFile} accept="image/x-png,image/jpeg" />
             <div className={classes.item} onClick={openFileSelector}>
@@ -85,6 +109,17 @@ function AssetsDialog (props: Props) {
               </Grid>
             </div>
           </Grid>
+          {
+            !assets.loading && assets.data.getAssets.map((asset) => {
+              return (
+                <Grid key={asset.id} item xs={4} className={classes.gridItem}>
+                  <Image className={classes.gridImage} publicId={asset.publicId} onClick={() => onSelect(asset)}>
+                    <Transformation height="300" width="300" crop="fill" />
+                  </Image>
+                </Grid>
+              )
+            })
+          }
         </Grid>
       </DialogContent>
     </Dialog>

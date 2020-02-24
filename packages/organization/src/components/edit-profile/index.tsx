@@ -42,6 +42,10 @@ function EditProfile (props: Props) {
     });
   };
 
+  const handleAssetSelect = (asset) => {
+    console.log(asset);
+  }
+
   return (
     <form 
       method="post"
@@ -104,7 +108,7 @@ function EditProfile (props: Props) {
           </Grid>
         </CardActions>
       </Card>
-      <AssetsDialog open={dialogOpen} onClose={() => setDialogOpen(false)} />
+      <AssetsDialog type="OrganizationAvatar" open={dialogOpen} onClose={() => setDialogOpen(false)} onSelect={handleAssetSelect} />
     </form>
   );
 }

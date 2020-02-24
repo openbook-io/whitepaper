@@ -4,6 +4,7 @@ import { ApolloClient, InMemoryCache, HttpLink, ApolloLink } from 'apollo-boost'
 import { useCookies } from 'react-cookie';
 import Layout from './layout';
 import parseDomain from 'parse-domain';
+import { createUploadLink } from 'apollo-upload-client'
 
 function App() {
   const [ cookies ] = useCookies(['token']);
@@ -20,8 +21,8 @@ function App() {
       });
       return forward(operation);
     }).concat(
-      new HttpLink({
-        uri: process.env.REACT_APP_OPENBOOK_GRAPHQL_URL, // Server URL
+      createUploadLink({
+        uri: `${process.env.REACT_APP_OPENBOOK_GRAPHQL_URL}`
       })
     ),
     cache: new InMemoryCache()

@@ -32,7 +32,7 @@ const create = (initialState, headers) => {
     }).then(response => response)
   }
   
-  const httpLink = new createUploadLink({
+  const httpLink = createUploadLink({
     uri: `${openbookGraphqlUrl}`, // Server URL (must be absolute)
     credentials: 'same-origin',
     fetch: enchancedFetch,

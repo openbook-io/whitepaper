@@ -7,6 +7,11 @@ const ORGANIZATION_FRAGMENT = gql`
     slug
     about
     website
+    picture {
+      id
+      version
+      publicId
+    }
   }
 `
 

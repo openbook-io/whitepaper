@@ -17,6 +17,7 @@ import style from './style';
 import { MY_CURRENT_ORGANIZATION } from '../queries/organization';
 import { useQuery } from '@apollo/react-hooks';
 import { OrganizationProvider } from '../utils/organizationContext';
+import { CloudinaryContext } from 'cloudinary-react';
 
 interface Props extends WithStyles<typeof style> {}
 
@@ -28,22 +29,24 @@ function Layout(props: Props) {
     <div>
       { !loading && !error && 
         <React.Fragment>
-          <OrganizationProvider value={data.whatIsMyCurrentOrganization}>
-            <Header />
-            <Sidebar />
-            <div className={classes.toolbar} />
-            <main className={classes.content}>
-              <div className={classes.container}>
-                <Router>
-                  <Home path="/" />
-                  <MyCoins path="/my-coins" />
-                  <AddCoin path="/add-coin" />
-                  <EditCoin path="/edit-coin/:coinId" />
-                  <EditProfile path="/edit-profile" />
-                </Router>
-              </div>
-            </main>
-          </OrganizationProvider>
+          <CloudinaryContext cloudName={process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}>
+            <OrganizationProvider value={data.whatIsMyCurrentOrganization}>
+              <Header />
+              <Sidebar />
+              <div className={classes.toolbar} />
+              <main className={classes.content}>
+                <div className={classes.container}>
+                  <Router>
+                    <Home path="/" />
+                    <MyCoins path="/my-coins" />
+                    <AddCoin path="/add-coin" />
+                    <EditCoin path="/edit-coin/:coinId" />
+                    <EditProfile path="/edit-profile" />
+                  </Router>
+                </div>
+              </main>
+            </OrganizationProvider>
+          </CloudinaryContext>
         </React.Fragment>
       }
       { !loading && error && 
