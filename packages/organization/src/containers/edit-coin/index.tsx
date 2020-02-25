@@ -6,8 +6,8 @@ import {
   WithStyles
 } from '@material-ui/core';
 import style from './style';
-import { useQuery } from '@apollo/react-hooks';
-import { MY_CRYPTOCURRENCY } from '@whitepaper/queries';
+import { useQuery, useMutation } from '@apollo/react-hooks';
+import { MY_CRYPTOCURRENCY, EDIT_CRYPTOCURRENCY } from '@whitepaper/queries';
 import PageLoader from '../../components/page-loader';
 
 interface Props extends RouteComponentProps, WithStyles<typeof style> {
@@ -23,14 +23,20 @@ function EditCoinPage(props: Props) {
     }
   })
 
+  const [updateCryptocurrency, {loading}] = useMutation(
+    EDIT_CRYPTOCURRENCY
+  )
+
   const handleSave = async (coin: any) => {
-    console.log(coin);
+    await updateCryptocurrency({
+      variables: {data: coin}
+    })
   }
 
   return (
     <div className={classes.main}>
       {!myCrypto.loading && 
-        <AddCoin onSave={handleSave} coin={myCrypto.data.myCryptocurrency} edit={true} />
+        <AddCoin onSave={handleSave} coin={myCrypto.data.myCryptocurrency} edit={true} loading={loading} />
       }
       {myCrypto.loading && <PageLoader />}
     </div>

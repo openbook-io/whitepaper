@@ -9,8 +9,18 @@ const CRYPTOCURRENCY_FRAGMENT = gql`
 `
 
 const CREATE_CRYPTOCURRENCY = gql`
-  mutation CREATE_CRYPTOCURRENCY_MUTATION($ticker: String! $name: String!) {
-    createCryptocurrency(ticker: $ticker name: $name) {
+  mutation CREATE_CRYPTOCURRENCY_MUTATION($data: CryptocurrencyCreateInput!) {
+    createCryptocurrency(data: $data) {
+      ...CryptocurrencyFragment
+    }
+  }
+
+  ${CRYPTOCURRENCY_FRAGMENT}
+`;
+
+const EDIT_CRYPTOCURRENCY = gql`
+  mutation EDIT_CRYPTOCURRENCY_MUTATION($data: CryptocurrencyEditInput!) {
+    editCryptocurrency(data: $data) {
       ...CryptocurrencyFragment
     }
   }
@@ -41,5 +51,6 @@ const MY_CRYPTOCURRENCY = gql`
 export { 
   CREATE_CRYPTOCURRENCY,
   MY_CRYPTOCURRENCIES,
-  MY_CRYPTOCURRENCY
+  MY_CRYPTOCURRENCY,
+  EDIT_CRYPTOCURRENCY
 };

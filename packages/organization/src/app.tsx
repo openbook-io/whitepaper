@@ -1,6 +1,6 @@
 import React from 'react';
 import { ApolloProvider } from '@apollo/react-hooks';
-import { ApolloClient, InMemoryCache, HttpLink, ApolloLink } from 'apollo-boost';
+import { ApolloClient, InMemoryCache, ApolloLink } from 'apollo-boost';
 import { useCookies } from 'react-cookie';
 import Layout from './layout';
 import parseDomain from 'parse-domain';

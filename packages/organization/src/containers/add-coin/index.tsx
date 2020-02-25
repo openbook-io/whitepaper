@@ -17,7 +17,7 @@ function AddCoinPage(props: Props) {
 
   const handleSave = async (coin: any) => {
     await saveCoin({
-      variables: coin
+      variables: {data: coin}
     })
 
     navigate!('/my-coins')

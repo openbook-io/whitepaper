@@ -1,9 +1,7 @@
 import React from 'react';
 import { 
   withStyles, 
-  WithStyles,
-  Paper,
-  Typography
+  WithStyles
 } from '@material-ui/core';
 import style from './style';
 import { Link } from "@reach/router";
@@ -18,8 +16,8 @@ function Cryptocurrencies (props: Props) {
   return (
     <div className={classes.outer}>
       <h1>Cryptocurrencies</h1>
-      {cryptocurrencies.map((cryptocurrency: any) => {
-        return (<div>{cryptocurrency.name} <Link to={`/edit-coin/${cryptocurrency.id}`}>edit</Link></div>)
+      {cryptocurrencies.map((cryptocurrency: any, index) => {
+        return (<div key={index}>{cryptocurrency.name} <Link to={`/edit-coin/${cryptocurrency.id}`}>edit</Link></div>)
       })}
     </div>
   );

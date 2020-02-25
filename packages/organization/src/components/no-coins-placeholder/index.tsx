@@ -15,7 +15,7 @@ function NoCoinsPlaceholder(props:  Props) {
   
   return (
     <div className={classes.container}>
-      <img className={classes.placeholder} src="/placeholder-coin.svg" />
+      <img className={classes.placeholder} src="/placeholder-coin.svg" alt="No Coins Placeholder" />
       <Typography variant="h4" gutterBottom>
         Cryptocurrency
       </Typography>

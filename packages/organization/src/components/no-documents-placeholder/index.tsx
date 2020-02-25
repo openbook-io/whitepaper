@@ -14,7 +14,7 @@ function NoDocumentsPlaceholder(props: Props) {
 
   return (
     <div className={classes.container}>
-      <img className={classes.placeholder} src="/placeholder-document.svg" />
+      <img className={classes.placeholder} src="/placeholder-document.svg" alt="No Documents Placeholder" />
       <Typography variant="h4" gutterBottom>
         Whitepaper
       </Typography>

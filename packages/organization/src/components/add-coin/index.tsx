@@ -22,9 +22,9 @@ interface Props extends WithStyles<typeof style> {
 function AddCoin (props: Props) {
   const { classes, edit, coin, onSave, loading } = props;
 
-  const [values, setValues] = useState(coin || {
-    name: '',
-    ticker: ''
+  const [values, setValues] = useState({
+    name: coin && (coin.name  || ''),
+    ticker: coin && (coin.ticker  || '')
   })
 
   const handleChangeText = (event: ChangeEvent<HTMLInputElement>) => {
@@ -40,6 +40,13 @@ function AddCoin (props: Props) {
       ticker: event.target.value.toUpperCase().replace(/[^A-Z0-9]/g, "")
     });
   };
+
+  const handleSave = () => {
+    onSave({
+      ...values,
+      ...(coin) && {id: coin.id}
+    });
+  }
 
   return (
     <Card>
@@ -67,7 +74,7 @@ function AddCoin (props: Props) {
       <CardActions>
         <Grid container alignItems="center" justify="space-between">
           <Grid item>
-            <Button type="submit" color="secondary" variant="contained" disabled={loading} onClick={() => onSave(values)}>{edit ? 'Update Coin' : 'Save Coin'}</Button>
+            <Button type="submit" color="secondary" variant="contained" disabled={loading} onClick={handleSave}>{edit ? 'Update Coin' : 'Save Coin'}</Button>
           </Grid>
           {loading && 
             <Grid item>
