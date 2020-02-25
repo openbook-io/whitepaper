@@ -4,8 +4,7 @@ import { WithStyles, withStyles, Button, Paper, CircularProgress, FormControl, F
 import { useMutation } from '@apollo/react-hooks';
 import errorFormatting from '../../utils/errorFormatting'
 import { setCookie } from 'nookies'
-import { CURRENT_USER } from '../../queries/user';
-import { LOGIN } from '../../queries/login';
+import { LOGIN, CURRENT_USER } from '@whitepaper/queries';
 import Link from 'next/link';
 import Router from 'next/router';
 import getConfig from 'next/config'

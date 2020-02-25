@@ -9,9 +9,10 @@ import {
 import style from './style';
 import { Avatar } from '@whitepaper/ui';
 import TruncateMarkup from 'react-truncate-markup';
+import { OrganizationFragment } from '@whitepaper/queries';
 
 interface Props extends WithStyles<typeof style> {
-  organization: any
+  organization: OrganizationFragment
 }
 
 function OrganizationCard(props: Props) {
@@ -19,7 +20,7 @@ function OrganizationCard(props: Props) {
 
   return (
     <Paper className={classes.container}>
-      <Avatar type="organization" size={60} />
+      <Avatar type="organization" asset={organization.picture} size={60} />
       <Typography className={classes.title} variant="h5">{organization.name}</Typography>
       <TruncateMarkup lines={3}>
         <p className={classes.about}>

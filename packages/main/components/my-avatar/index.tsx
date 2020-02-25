@@ -1,4 +1,4 @@
-import { CURRENT_USER } from '../../queries/user';
+import { CURRENT_USER } from '@whitepaper/queries';
 import { Image } from 'cloudinary-react';
 import { useQuery } from '@apollo/react-hooks';
 

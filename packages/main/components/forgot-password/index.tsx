@@ -3,7 +3,7 @@ import style from './style';
 import { WithStyles, withStyles, Button, Paper, CircularProgress, FormControl, FormHelperText, Input, InputLabel } from '@material-ui/core';
 import { useMutation } from '@apollo/react-hooks';
 import errorFormatting from '../../utils/errorFormatting'
-import { FORGOT_PASSWORD } from '../../queries/login';
+import { FORGOT_PASSWORD } from '@whitepaper/queries';
 import Link from 'next/link';
 
 interface Props extends WithStyles<typeof style> {}

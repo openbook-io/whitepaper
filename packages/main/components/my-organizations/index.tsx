@@ -11,7 +11,7 @@ import {
 import Link from 'next/link';
 import style from './style';
 import { useQuery } from '@apollo/react-hooks';
-import { MY_ORGANIZATION } from '../../queries/organization';
+import { MY_ORGANIZATION } from '@whitepaper/queries';
 import OrganizationCard from '../_ui/organization-card';
 
 interface Props extends WithStyles<typeof style> {}

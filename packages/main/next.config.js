@@ -1,4 +1,4 @@
-const withTM = require('next-transpile-modules')(['@whitepaper/ui'])
+const withTM = require('next-transpile-modules')(['@whitepaper/ui', '@whitepaper/queries'])
 
 require('dotenv').config()
 

@@ -3,7 +3,7 @@ import style from './style';
 import { WithStyles, withStyles, Button, Paper, CircularProgress, FormControl, FormHelperText, Input, InputLabel } from '@material-ui/core';
 import { useMutation } from '@apollo/react-hooks';
 import errorFormatting from '../../utils/errorFormatting'
-import { CHANGE_PASSWORD } from '../../queries/login';
+import { CHANGE_PASSWORD } from '@whitepaper/queries';
 import Link from 'next/link';
 import { useRouter } from 'next/router'
 

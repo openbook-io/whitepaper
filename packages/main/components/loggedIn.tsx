@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { useQuery } from '@apollo/react-hooks';
-import { CURRENT_USER } from '../queries/user';
+import { CURRENT_USER } from '@whitepaper/queries';
 
 function LoggedIn (props) {
   const user = useQuery(CURRENT_USER)

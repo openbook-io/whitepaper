@@ -15,7 +15,7 @@ import {
 } from '@material-ui/core';
 import style from './style';
 import { useMutation } from '@apollo/react-hooks';
-import { CREATE_ORGANIZATION, MY_ORGANIZATION } from '../../queries/organization';
+import { CREATE_ORGANIZATION, MY_ORGANIZATION } from '@whitepaper/queries';
 import errorFormatting from '../../utils/errorFormatting'
 import Router from 'next/router';
 
