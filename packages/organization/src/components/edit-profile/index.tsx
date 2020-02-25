@@ -26,12 +26,13 @@ function EditProfile (props: Props) {
 
   const [values, setValues] = useState({
     assetId: organization && organization.picture && (organization.picture.id || null),
-    name: organization && organization.name || '',
-    website: organization && organization.website || '',
-    about: organization && organization.about || '',
+    name: organization && (organization.name || ''),
+    website: organization && (organization.website || ''),
+    about: organization && (organization.about || ''),
   })
 
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [selectedAsset, setSelectedAsset] = useState(null);
 
   const [editOrganization, {loading}] = useMutation(EDIT_ORGANIZATION)
 
@@ -43,7 +44,13 @@ function EditProfile (props: Props) {
   };
 
   const handleAssetSelect = (asset) => {
-    console.log(asset);
+    setValues({
+      ...values,
+      assetId: asset.id
+    })
+
+    setSelectedAsset(asset);
+    setDialogOpen(false)
   }
 
   return (
@@ -60,7 +67,7 @@ function EditProfile (props: Props) {
     }}>
       <Card>
         <CardContent>
-          <Avatar className={classes.avatar} type="organization" size={120} onClick={() => setDialogOpen(true)} />
+          <Avatar className={classes.avatar} asset={selectedAsset || organization.picture} type="organization" size={120} onClick={() => setDialogOpen(true)} />
           <TextField
             className={classes.textField}
             fullWidth

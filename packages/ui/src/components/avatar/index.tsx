@@ -9,18 +9,20 @@ import {
 } from '@material-ui/core';
 import clsx from 'clsx';
 import Domain from 'mdi-react/DomainIcon';
+import { AssetFragment } from '@whitepaper/queries';
+import { Image, Transformation } from 'cloudinary-react';
 
 interface Props extends WithStyles<typeof style> {
   size: number;
   loading?: boolean;
   type: "organization" | "user";
-  picture?:  string | null;
+  asset?:  AssetFragment | null;
   className?: string;
   onClick?: () => void
 }
 
 function AvatarIcon (props: Props) {
-  const {classes, size, loading, type, picture, className, onClick} = props;
+  const {classes, size, loading, type, asset, className, onClick} = props;
 
   const styles = {
     bigAvatar: {
@@ -39,8 +41,14 @@ function AvatarIcon (props: Props) {
 
   return (
     <div onClick={onClick} className={clsx(className, classes.outer)}>
-      {type === 'organization' && picture && <Avatar style={styles.bigAvatar} src={picture} className={clsx(classes.avatar)} />}
-      {(type === 'organization' && !picture) && <Avatar style={styles.bigAvatar} className={clsx(classes.avatar, classes.avatarOrganization)}>
+      {type === 'organization' && asset && 
+        <Avatar style={styles.bigAvatar} className={clsx(classes.avatar)}>
+          <Image publicId={asset.publicId} className={classes.image}>
+            <Transformation height="300" width="300" crop="fill" />
+          </Image>
+        </Avatar>
+      }
+      {(type === 'organization' && !asset) && <Avatar style={styles.bigAvatar} className={clsx(classes.avatar, classes.avatarOrganization)}>
         <Domain style={styles.domainIcon} />
       </Avatar>}
       { loading &&

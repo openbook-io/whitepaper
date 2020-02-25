@@ -1,4 +1,4 @@
-import React, { ReactChild, useRef, ChangeEvent } from 'react';
+import React, { ReactChild, useRef } from 'react';
 import style from './style';
 import { 
   WithStyles, 
@@ -8,7 +8,8 @@ import {
   Typography,
   IconButton,
   Slide,
-  Grid
+  Grid,
+  CircularProgress
 } from '@material-ui/core';
 import CloseIcon from 'mdi-react/CloseIcon';
 import CloudUploadIcon from 'mdi-react/CloudUploadIcon';
@@ -70,8 +71,10 @@ function AssetsDialog (props: Props) {
     if(event.target.files.length) {
       const file = event.target.files[0];
  
-      const result = await upload({
-        variables: {file: file, type: type}
+      await upload({
+        variables: {file: file, type: type},
+        refetchQueries: [{query: GET_ASSETS, variables: {type}}],
+        awaitRefetchQueries: true
       });
     }
   }
@@ -122,6 +125,13 @@ function AssetsDialog (props: Props) {
           }
         </Grid>
       </DialogContent>
+      {uploadAssetInfo.loading &&
+        <Grid container direction="column" justify="center" alignItems="center" className={classes.progress}>
+          <Grid item>
+            <CircularProgress  />
+          </Grid>
+        </Grid>
+      }
     </Dialog>
   );
 }

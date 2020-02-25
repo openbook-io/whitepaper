@@ -12,6 +12,7 @@ export interface OrganizationFragment_picture {
   id: string;
   version: number | null;
   publicId: string;
+  type: string;
 }
 
 export interface OrganizationFragment {

@@ -26,7 +26,7 @@ function Header (props: Props) {
           <Grid item>
           <Link to="/edit-profile">
             <Tooltip title="Profile" placement="right" arrow>
-              <div className={classes.avatarLeft}><Avatar type="organization" size={42} /></div>
+              <div className={classes.avatarLeft}><Avatar type="organization" asset={organization.picture} size={42} /></div>
             </Tooltip>
           </Link>
           </Grid>

@@ -16,6 +16,7 @@ export interface OrganizationEditInput {
   name: string;
   website?: string | null;
   about?: string | null;
+  assetId?: string | null;
 }
 
 //==============================================================

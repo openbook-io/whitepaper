@@ -5,3 +5,4 @@ export * from './src/queries/organization';
 
 /* Export Types */
 export * from './src/types/OrganizationFragment';
+export * from './src/types/AssetFragment';

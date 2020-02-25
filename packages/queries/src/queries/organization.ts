@@ -11,6 +11,7 @@ const ORGANIZATION_FRAGMENT = gql`
       id
       version
       publicId
+      type
     }
   }
 `

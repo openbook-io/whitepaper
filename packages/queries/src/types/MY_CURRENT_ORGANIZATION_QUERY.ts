@@ -12,6 +12,7 @@ export interface MY_CURRENT_ORGANIZATION_QUERY_whatIsMyCurrentOrganization_pictu
   id: string;
   version: number | null;
   publicId: string;
+  type: string;
 }
 
 export interface MY_CURRENT_ORGANIZATION_QUERY_whatIsMyCurrentOrganization {

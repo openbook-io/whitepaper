@@ -22,6 +22,9 @@ const styles = (theme: Theme) => createStyles({
     left: 0,
     right: 0,
     bottom: 0
+  },
+  image: {
+    width: '100%'
   }
 })
 
