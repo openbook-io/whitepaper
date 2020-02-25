@@ -2,7 +2,8 @@ import { createStyles, Theme } from '@material-ui/core/styles';
 
 const styles = (theme: Theme) => createStyles({
   container: {
-    padding: '30px'
+    padding: '30px',
+    height: '100%'
   },
   avatar: {
     margin: '10px 0px',
@@ -20,7 +21,7 @@ const styles = (theme: Theme) => createStyles({
   },
   button: {
     margin: -8,
-    marginTop: 0
+    marginTop: 10
   }
 })
 

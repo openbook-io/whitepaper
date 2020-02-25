@@ -22,7 +22,7 @@ function OrganizationCard(props: Props) {
     <Paper className={classes.container}>
       <Avatar type="organization" asset={organization.picture} size={60} />
       <Typography className={classes.title} variant="h5">{organization.name}</Typography>
-      <TruncateMarkup lines={3}>
+      <TruncateMarkup lines={2}>
         <p className={classes.about}>
           {organization.about}
         </p>
