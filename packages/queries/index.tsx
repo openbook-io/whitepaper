@@ -9,3 +9,4 @@ export * from './src/queries/user';
 /* Export Types */
 export * from './src/types/OrganizationFragment';
 export * from './src/types/AssetFragment';
+export * from './src/types/UserFragment';

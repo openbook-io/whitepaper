@@ -20,7 +20,8 @@ import LoggedIn from '../loggedIn';
 import Router from 'next/router';
 import { useApolloClient } from '@apollo/react-hooks';
 import { destroyCookie } from 'nookies';
-import MyAvatar from '../my-avatar'
+import { Avatar } from '@whitepaper/ui';
+import { useUser } from '../../utils/userContext';
 
 interface Props extends WithStyles<typeof style> {}
 
@@ -29,6 +30,7 @@ function Header (props: Props) {
   const client = useApolloClient();
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
+  const user = useUser();
 
   const handleToggle = () => {
     setOpen(prevOpen => !prevOpen);
@@ -66,7 +68,7 @@ function Header (props: Props) {
         <div>
           <LoggedIn>
             <IconButton ref={anchorRef} aria-controls={open ? 'menu-list-grow' : undefined} aria-haspopup="true" onClick={handleToggle}>
-              <MyAvatar className={classes.image} size="80" />
+              <Avatar className={classes.image} type="user" asset={user && user.avatar} size={38} />
             </IconButton>
           </LoggedIn>
           <Popper open={open} anchorEl={anchorRef.current} placement="bottom-end" role={undefined} transition disablePortal>

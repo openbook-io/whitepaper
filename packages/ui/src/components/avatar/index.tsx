@@ -9,6 +9,7 @@ import {
 } from '@material-ui/core';
 import clsx from 'clsx';
 import Domain from 'mdi-react/DomainIcon';
+import Person from 'mdi-react/PersonIcon';
 import { AssetFragment } from '@whitepaper/queries';
 import { Image, Transformation } from 'cloudinary-react';
 
@@ -41,7 +42,7 @@ function AvatarIcon (props: Props) {
 
   return (
     <div onClick={onClick} className={clsx(className, classes.outer)}>
-      {type === 'organization' && asset && 
+      {asset && 
         <Avatar style={styles.bigAvatar} className={clsx(classes.avatar)}>
           <Image publicId={asset.publicId} className={classes.image}>
             <Transformation height="300" width="300" crop="fill" />
@@ -51,6 +52,9 @@ function AvatarIcon (props: Props) {
       {(type === 'organization' && !asset) && <Avatar style={styles.bigAvatar} className={clsx(classes.avatar, classes.avatarOrganization)}>
         <Domain style={styles.domainIcon} />
       </Avatar>}
+      {(type === 'user' && !asset) && <Avatar className={clsx(classes.avatar, classes.avatarPerson)} style={styles.bigAvatar}>
+          <Person style={styles.avatarIcon} />
+        </Avatar>}
       { loading &&
         <Grid container justify="center" alignItems="center" className={classes.progress}>
           <Grid item>

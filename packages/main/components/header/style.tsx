@@ -30,8 +30,6 @@ const styles = (theme: Theme) => createStyles({
     marginRight: '10px'
   },
   image: {
-    width: 42,
-    height: 42,
     objectFit: 'cover',
     backgroundColor: '#fff',
     borderRadius: '50%',
