@@ -7,7 +7,7 @@ import {
 } from '@material-ui/core';
 import style from './style';
 import { useMutation } from '@apollo/react-hooks';
-import { CREATE_CRYPTOCURRENCY } from '../../queries/cryptocurrencies';
+import { CREATE_CRYPTOCURRENCY } from '@whitepaper/queries';
 
 interface Props extends RouteComponentProps, WithStyles<typeof style> {}
 

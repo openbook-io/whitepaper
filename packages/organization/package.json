@@ -14,6 +14,7 @@
     "@types/react": "16.9.20",
     "@types/react-dom": "16.9.5",
     "@whitepaper/ui": "1.0.0",
+    "@whitepaper/queries": "1.0.0",
     "apollo-boost": "^0.4.7",
     "apollo-upload-client": "^12.1.0",
     "cloudinary-react": "^1.3.0",

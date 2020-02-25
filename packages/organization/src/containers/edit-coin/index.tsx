@@ -7,7 +7,7 @@ import {
 } from '@material-ui/core';
 import style from './style';
 import { useQuery } from '@apollo/react-hooks';
-import { MY_CRYPTOCURRENCY } from '../../queries/cryptocurrencies';
+import { MY_CRYPTOCURRENCY } from '@whitepaper/queries';
 import PageLoader from '../../components/page-loader';
 
 interface Props extends RouteComponentProps, WithStyles<typeof style> {

@@ -1,13 +1,7 @@
 import React, {useContext} from 'react'
+import {OrganizationFragment} from '@whitepaper/queries';
 
-type OrganizationProps = { 
-  name: string;
-  slug: string;
-  website: string;
-  about: string;
-};
-
-const OrganizationContext = React.createContext<Partial<OrganizationProps>>({})
+const OrganizationContext = React.createContext<Partial<OrganizationFragment>>({})
 
 export const OrganizationProvider = OrganizationContext.Provider
 export const OrganizationConsumer = OrganizationContext.Consumer

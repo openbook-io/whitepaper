@@ -14,7 +14,7 @@ import {
   WithStyles
 } from '@material-ui/core';
 import style from './style';
-import { MY_CURRENT_ORGANIZATION } from '../queries/organization';
+import { MY_CURRENT_ORGANIZATION } from '@whitepaper/queries';
 import { useQuery } from '@apollo/react-hooks';
 import { OrganizationProvider } from '../utils/organizationContext';
 import { CloudinaryContext } from 'cloudinary-react';

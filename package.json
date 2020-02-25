@@ -4,6 +4,7 @@
     "packages/*"
   ],
   "scripts": {
+    "apollo:generate": "yarn workspace @whitepaper/queries apollo:generate",
     "main-dev": "nodemon",
     "organization-dev": "yarn workspace @whitepaper/organization dev",
     "build": "yarn --cwd packages/main build && tsc --project tsconfig.server.json",

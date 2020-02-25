@@ -15,7 +15,7 @@ import CloudUploadIcon from 'mdi-react/CloudUploadIcon';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import { TransitionProps } from '@material-ui/core/transitions';
 import { useMutation, useQuery } from '@apollo/react-hooks';
-import { GET_ASSETS, UPLOAD_ASSET } from '../../queries/assets';
+import { UPLOAD_ASSET, GET_ASSETS } from '@whitepaper/queries';
 import { Image, Transformation } from 'cloudinary-react';
 
 interface Props extends WithStyles<typeof style> {

@@ -13,8 +13,7 @@ import {
 import style from './style';
 import { useOrganization } from '../../utils/organizationContext';
 import { useMutation } from '@apollo/react-hooks';
-import { EDIT_ORGANIZATION } from '../../queries/organization';
-//import omitEmpty from 'omit-empty';
+import { EDIT_ORGANIZATION } from '@whitepaper/queries';
 import omitEmpty from '../../utils/omitEmpty';
 import { AssetsDialog, Avatar } from '@whitepaper/ui';
 
@@ -26,6 +25,7 @@ function EditProfile (props: Props) {
   const organization = useOrganization();
 
   const [values, setValues] = useState({
+    assetId: organization && organization.picture && (organization.picture.id || null),
     name: organization && organization.name || '',
     website: organization && organization.website || '',
     about: organization && organization.about || '',
