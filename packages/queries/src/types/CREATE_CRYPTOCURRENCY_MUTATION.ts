@@ -3,6 +3,8 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
+import { CryptocurrencyCreateInput } from "./globalTypes";
+
 // ====================================================
 // GraphQL mutation operation: CREATE_CRYPTOCURRENCY_MUTATION
 // ====================================================
@@ -19,6 +21,5 @@ export interface CREATE_CRYPTOCURRENCY_MUTATION {
 }
 
 export interface CREATE_CRYPTOCURRENCY_MUTATIONVariables {
-  ticker: string;
-  name: string;
+  data: CryptocurrencyCreateInput;
 }

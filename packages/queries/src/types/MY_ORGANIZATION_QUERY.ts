@@ -15,6 +15,20 @@ export interface MY_ORGANIZATION_QUERY_myOrganizations_picture {
   type: string;
 }
 
+export interface MY_ORGANIZATION_QUERY_myOrganizations_links_socialProvider {
+  __typename: "SocialProvider";
+  id: string;
+  name: string;
+  iconName: string;
+}
+
+export interface MY_ORGANIZATION_QUERY_myOrganizations_links {
+  __typename: "OrganizationLink";
+  id: string;
+  url: string;
+  socialProvider: MY_ORGANIZATION_QUERY_myOrganizations_links_socialProvider;
+}
+
 export interface MY_ORGANIZATION_QUERY_myOrganizations {
   __typename: "Organization";
   id: string;
@@ -23,6 +37,7 @@ export interface MY_ORGANIZATION_QUERY_myOrganizations {
   about: string | null;
   website: string | null;
   picture: MY_ORGANIZATION_QUERY_myOrganizations_picture | null;
+  links: MY_ORGANIZATION_QUERY_myOrganizations_links[];
 }
 
 export interface MY_ORGANIZATION_QUERY {

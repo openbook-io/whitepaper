@@ -17,6 +17,20 @@ export interface CREATE_ORGANIZATION_MUTATION_createOrganization_picture {
   type: string;
 }
 
+export interface CREATE_ORGANIZATION_MUTATION_createOrganization_links_socialProvider {
+  __typename: "SocialProvider";
+  id: string;
+  name: string;
+  iconName: string;
+}
+
+export interface CREATE_ORGANIZATION_MUTATION_createOrganization_links {
+  __typename: "OrganizationLink";
+  id: string;
+  url: string;
+  socialProvider: CREATE_ORGANIZATION_MUTATION_createOrganization_links_socialProvider;
+}
+
 export interface CREATE_ORGANIZATION_MUTATION_createOrganization {
   __typename: "Organization";
   id: string;
@@ -25,6 +39,7 @@ export interface CREATE_ORGANIZATION_MUTATION_createOrganization {
   about: string | null;
   website: string | null;
   picture: CREATE_ORGANIZATION_MUTATION_createOrganization_picture | null;
+  links: CREATE_ORGANIZATION_MUTATION_createOrganization_links[];
 }
 
 export interface CREATE_ORGANIZATION_MUTATION {

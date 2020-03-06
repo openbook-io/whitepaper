@@ -17,6 +17,17 @@ export interface ChangePasswordInput {
   token: string;
 }
 
+export interface CryptocurrencyCreateInput {
+  name: string;
+  ticker: string;
+}
+
+export interface CryptocurrencyEditInput {
+  name: string;
+  ticker: string;
+  id: string;
+}
+
 export interface ForgotPasswordInput {
   email: string;
 }
@@ -37,9 +48,19 @@ export interface OrganizationEditInput {
   assetId?: string | null;
 }
 
+export interface OrganizationEditLinkInput {
+  url: string;
+  id: string;
+}
+
 export interface OrganizationInput {
   name: string;
   slug: string;
+}
+
+export interface OrganizationLinkInput {
+  url: string;
+  socialProviderId: string;
 }
 
 export interface RegisterInput {
@@ -49,6 +70,14 @@ export interface RegisterInput {
   email: string;
   password: string;
   newsletter: boolean;
+}
+
+export interface UserInput {
+  firstName: string;
+  lastName: string;
+  bio?: string | null;
+  website?: string | null;
+  assetId?: string | null;
 }
 
 //==============================================================

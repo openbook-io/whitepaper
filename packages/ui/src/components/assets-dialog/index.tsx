@@ -1,4 +1,4 @@
-import React, { ReactChild, useRef } from 'react';
+import React, { useRef } from 'react';
 import style from './style';
 import { 
   WithStyles, 
@@ -6,15 +6,12 @@ import {
   Dialog,
   DialogContent,
   Typography,
-  IconButton,
-  Slide,
   Grid,
   CircularProgress
 } from '@material-ui/core';
-import CloseIcon from 'mdi-react/CloseIcon';
+import DialogTitle from '../dialog-title';
 import CloudUploadIcon from 'mdi-react/CloudUploadIcon';
-import MuiDialogTitle from '@material-ui/core/DialogTitle';
-import { TransitionProps } from '@material-ui/core/transitions';
+import Transition from '../transition';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { UPLOAD_ASSET, GET_ASSETS } from '@whitepaper/queries';
 import { Image, Transformation } from 'cloudinary-react';
@@ -25,30 +22,6 @@ interface Props extends WithStyles<typeof style> {
   type?: string;
   onSelect: (asset) => void;
 }
-
-interface PropsTwo extends WithStyles<typeof style> {
-  children: ReactChild;
-  onClose?: () => void;
-}
-
-const DialogTitle = withStyles(style)((props: PropsTwo) => {
-  const { children, classes, onClose } = props;
-
-  return (
-    <MuiDialogTitle disableTypography className={classes.dialogTitle}>
-      <Typography variant="h6">{children}</Typography>
-      {onClose ? (
-        <IconButton aria-label="Close" className={classes.closeButton} onClick={onClose}>
-          <CloseIcon />
-        </IconButton>
-      ) : null}
-    </MuiDialogTitle>
-  );
-});
-
-const Transition = React.forwardRef(function Transition(props: TransitionProps, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
 
 function AssetsDialog (props: Props) {
   const { classes, open, onClose, type, onSelect } = props;

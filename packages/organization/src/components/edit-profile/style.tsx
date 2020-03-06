@@ -8,6 +8,15 @@ const styles = (theme: Theme) => createStyles({
     border: '2px solid #c9d0d8',
     marginBottom: 20,
     cursor: 'pointer'
+  },
+  addLinkButton: {
+    marginTop: 20
+  },
+  icons: {
+    marginTop: 15
+  },
+  simpleIcon: {
+    width: 40
   }
 })
 

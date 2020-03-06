@@ -17,6 +17,20 @@ export interface EDIT_ORGANIZATION_MUTATION_editOrganization_picture {
   type: string;
 }
 
+export interface EDIT_ORGANIZATION_MUTATION_editOrganization_links_socialProvider {
+  __typename: "SocialProvider";
+  id: string;
+  name: string;
+  iconName: string;
+}
+
+export interface EDIT_ORGANIZATION_MUTATION_editOrganization_links {
+  __typename: "OrganizationLink";
+  id: string;
+  url: string;
+  socialProvider: EDIT_ORGANIZATION_MUTATION_editOrganization_links_socialProvider;
+}
+
 export interface EDIT_ORGANIZATION_MUTATION_editOrganization {
   __typename: "Organization";
   id: string;
@@ -25,6 +39,7 @@ export interface EDIT_ORGANIZATION_MUTATION_editOrganization {
   about: string | null;
   website: string | null;
   picture: EDIT_ORGANIZATION_MUTATION_editOrganization_picture | null;
+  links: EDIT_ORGANIZATION_MUTATION_editOrganization_links[];
 }
 
 export interface EDIT_ORGANIZATION_MUTATION {

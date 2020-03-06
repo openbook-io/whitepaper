@@ -15,6 +15,20 @@ export interface OrganizationFragment_picture {
   type: string;
 }
 
+export interface OrganizationFragment_links_socialProvider {
+  __typename: "SocialProvider";
+  id: string;
+  name: string;
+  iconName: string;
+}
+
+export interface OrganizationFragment_links {
+  __typename: "OrganizationLink";
+  id: string;
+  url: string;
+  socialProvider: OrganizationFragment_links_socialProvider;
+}
+
 export interface OrganizationFragment {
   __typename: "Organization";
   id: string;
@@ -23,4 +37,5 @@ export interface OrganizationFragment {
   about: string | null;
   website: string | null;
   picture: OrganizationFragment_picture | null;
+  links: OrganizationFragment_links[];
 }

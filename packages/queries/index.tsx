@@ -5,6 +5,7 @@ export * from './src/queries/organization';
 export * from './src/queries/login';
 export * from './src/queries/register';
 export * from './src/queries/user';
+export * from './src/queries/socialProvider';
 
 /* Export Types */
 export * from './src/types/OrganizationFragment';
