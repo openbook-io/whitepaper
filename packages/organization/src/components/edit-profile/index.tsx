@@ -8,7 +8,8 @@ import {
   TextField,
   Button,
   CircularProgress,
-  Grid
+  Grid,
+  Snackbar
 } from '@material-ui/core';
 import style from './style';
 import { useOrganization } from '../../utils/organizationContext';
@@ -32,6 +33,7 @@ function EditProfile (props: Props) {
     about: organization && (organization.about || ''),
   })
 
+  const [openSnackbar, setOpenSnackbar] = useState(false)
   const [openLinkDialog, setOpenLinkDialog] = useState(false)
   const [openUrlLinkDialog, setUrlOpenLinkDialog] = useState({
     open: false,
@@ -153,6 +155,8 @@ function EditProfile (props: Props) {
             data: omitEmpty(values)
           }
         });
+
+        setOpenSnackbar(true)
     }}>
       <Card>
         <CardContent>
@@ -228,6 +232,13 @@ function EditProfile (props: Props) {
         onSave={onLinkDialogSave} 
         loading={addOrganizationLinkInfo.loading} 
         error={urlValidationErrors} />
+      <Snackbar
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        open={openSnackbar}
+        autoHideDuration={3000}
+        onClose={() => setOpenSnackbar(false)}
+        message="Saved Organization Profile"
+      />
     </form>
   );
 }

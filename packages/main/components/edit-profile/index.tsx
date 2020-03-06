@@ -10,7 +10,8 @@ import {
   TextField,
   Grid,
   Button,
-  CircularProgress
+  CircularProgress,
+  Snackbar
 } from '@material-ui/core';
 import { useUser } from '../../utils/userContext';
 import { AssetsDialog, Avatar, omitEmpty, SimpleIcon, LinkAddModal, LinkAddUrlModal, errorFormatting } from '@whitepaper/ui';
@@ -32,6 +33,7 @@ function EditProfile (props: Props) {
     bio: user && (user.bio || ''),
   })
 
+  const [openSnackbar, setOpenSnackbar] = useState(false)
   const [openLinkDialog, setOpenLinkDialog] = useState(false)
   const [openUrlLinkDialog, setUrlOpenLinkDialog] = useState({
     open: false,
@@ -156,6 +158,8 @@ function EditProfile (props: Props) {
                   data: omitEmpty(values)
                 }
               });
+
+              setOpenSnackbar(true)
             }}>
             <Card>
               <CardContent>
@@ -248,6 +252,13 @@ function EditProfile (props: Props) {
               onSave={onLinkDialogSave} 
               loading={addUserLinkInfo.loading} 
               error={urlValidationErrors} />
+            <Snackbar
+              anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+              open={openSnackbar}
+              autoHideDuration={3000}
+              onClose={() => setOpenSnackbar(false)}
+              message="Saved User Profile"
+            />
           </form>
         </div>
       </Container>
