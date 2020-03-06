@@ -13,6 +13,15 @@ const USER_FRAGMENT = gql`
     lastName
     bio
     website
+    links {
+      id
+      url
+      socialProvider {
+        id
+        name
+        iconName
+      }
+    }
   }
 `
 
@@ -36,8 +45,35 @@ const UPDATE_USER = gql`
   ${USER_FRAGMENT}
 `
 
+const ADD_USER_LINK = gql`
+  mutation ADD_USER_LINK_MUTATION($data: UserLinkInput!) {
+    addUserLink(data: $data) {
+      id
+      url
+    }
+  }
+`;
+
+const EDIT_USER_LINK = gql`
+  mutation EDIT_USER_LINK_MUTATION($data: UserEditLinkInput!) {
+    editUserLink(data: $data) {
+      id
+      url
+    }
+  }
+`;
+
+const DELETE_USER_LINK = gql`
+  mutation DELETE_USER_LINK_MUTATION($id: ID!) {
+    deleteUserLink(id: $id)
+  }
+`;
+
 export { 
   CURRENT_USER,
   USER_FRAGMENT,
-  UPDATE_USER
+  UPDATE_USER,
+  ADD_USER_LINK,
+  EDIT_USER_LINK,
+  DELETE_USER_LINK
 };

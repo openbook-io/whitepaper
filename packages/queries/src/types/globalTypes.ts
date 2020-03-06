@@ -72,12 +72,22 @@ export interface RegisterInput {
   newsletter: boolean;
 }
 
+export interface UserEditLinkInput {
+  url: string;
+  id: string;
+}
+
 export interface UserInput {
   firstName: string;
   lastName: string;
   bio?: string | null;
   website?: string | null;
   assetId?: string | null;
+}
+
+export interface UserLinkInput {
+  url: string;
+  socialProviderId: string;
 }
 
 //==============================================================

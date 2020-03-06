@@ -13,6 +13,15 @@ const styles = (theme: Theme) => createStyles({
     margin: '50px auto',
     maxWidth: '600px',
     textAlign: 'left'
+  },
+  addLinkButton: {
+    marginTop: 20
+  },
+  icons: {
+    marginTop: 15
+  },
+  simpleIcon: {
+    width: 40
   }
 })
 

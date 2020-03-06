@@ -17,6 +17,20 @@ export interface LOGIN_MUTATION_login_user_avatar {
   type: string;
 }
 
+export interface LOGIN_MUTATION_login_user_links_socialProvider {
+  __typename: "SocialProvider";
+  id: string;
+  name: string;
+  iconName: string;
+}
+
+export interface LOGIN_MUTATION_login_user_links {
+  __typename: "UserLink";
+  id: string;
+  url: string;
+  socialProvider: LOGIN_MUTATION_login_user_links_socialProvider;
+}
+
 export interface LOGIN_MUTATION_login_user {
   __typename: "User";
   id: string;
@@ -25,6 +39,7 @@ export interface LOGIN_MUTATION_login_user {
   lastName: string;
   bio: string | null;
   website: string | null;
+  links: LOGIN_MUTATION_login_user_links[];
 }
 
 export interface LOGIN_MUTATION_login {

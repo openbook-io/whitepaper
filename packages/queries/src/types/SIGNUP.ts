@@ -17,6 +17,20 @@ export interface SIGNUP_register_user_avatar {
   type: string;
 }
 
+export interface SIGNUP_register_user_links_socialProvider {
+  __typename: "SocialProvider";
+  id: string;
+  name: string;
+  iconName: string;
+}
+
+export interface SIGNUP_register_user_links {
+  __typename: "UserLink";
+  id: string;
+  url: string;
+  socialProvider: SIGNUP_register_user_links_socialProvider;
+}
+
 export interface SIGNUP_register_user {
   __typename: "User";
   id: string;
@@ -25,6 +39,7 @@ export interface SIGNUP_register_user {
   lastName: string;
   bio: string | null;
   website: string | null;
+  links: SIGNUP_register_user_links[];
 }
 
 export interface SIGNUP_register {

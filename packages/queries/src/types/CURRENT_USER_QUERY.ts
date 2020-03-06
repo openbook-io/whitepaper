@@ -15,6 +15,20 @@ export interface CURRENT_USER_QUERY_me_avatar {
   type: string;
 }
 
+export interface CURRENT_USER_QUERY_me_links_socialProvider {
+  __typename: "SocialProvider";
+  id: string;
+  name: string;
+  iconName: string;
+}
+
+export interface CURRENT_USER_QUERY_me_links {
+  __typename: "UserLink";
+  id: string;
+  url: string;
+  socialProvider: CURRENT_USER_QUERY_me_links_socialProvider;
+}
+
 export interface CURRENT_USER_QUERY_me {
   __typename: "User";
   id: string;
@@ -23,6 +37,7 @@ export interface CURRENT_USER_QUERY_me {
   lastName: string;
   bio: string | null;
   website: string | null;
+  links: CURRENT_USER_QUERY_me_links[];
 }
 
 export interface CURRENT_USER_QUERY {

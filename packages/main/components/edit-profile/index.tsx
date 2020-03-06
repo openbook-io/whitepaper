@@ -13,9 +13,10 @@ import {
   CircularProgress
 } from '@material-ui/core';
 import { useUser } from '../../utils/userContext';
-import { AssetsDialog, Avatar, omitEmpty } from '@whitepaper/ui';
+import { AssetsDialog, Avatar, omitEmpty, SimpleIcon, LinkAddModal, LinkAddUrlModal, errorFormatting } from '@whitepaper/ui';
 import { useMutation } from '@apollo/react-hooks';
-import { UPDATE_USER } from '@whitepaper/queries';
+import { UPDATE_USER, ADD_USER_LINK, EDIT_USER_LINK, DELETE_USER_LINK, CURRENT_USER } from '@whitepaper/queries';
+import PlusCircleIcon from 'mdi-react/PlusCircleIcon';
 
 interface Props extends WithStyles<typeof style> {}
 
@@ -31,10 +32,21 @@ function EditProfile (props: Props) {
     bio: user && (user.bio || ''),
   })
 
+  const [openLinkDialog, setOpenLinkDialog] = useState(false)
+  const [openUrlLinkDialog, setUrlOpenLinkDialog] = useState({
+    open: false,
+    provider: {},
+    url: {}
+  })
+
   const [dialogOpen, setDialogOpen] = useState(false);
   const [selectedAsset, setSelectedAsset] = useState(null);
 
   const [updateUser, {loading}] = useMutation(UPDATE_USER)
+
+  const [addUserLink, addUserLinkInfo] = useMutation(ADD_USER_LINK)
+  const [editUserLink, editUserLinkInfo] = useMutation(EDIT_USER_LINK)
+  const [deleteUserLink, deleteUserLinkInfo] = useMutation(DELETE_USER_LINK)
 
   const handleChangeText = (event: ChangeEvent<HTMLInputElement>) => {
     setValues({
@@ -52,6 +64,83 @@ function EditProfile (props: Props) {
     setSelectedAsset(asset);
     setDialogOpen(false)
   }
+
+  const onLinkDialogClose = () => {
+    setOpenLinkDialog(false)
+  }
+
+  const onLinkDialogSave = async (provider, input) => {
+    await addUserLink({
+      variables: {
+        data: {url: input, socialProviderId: provider.id}
+      },
+      refetchQueries: [{query: CURRENT_USER}],
+      awaitRefetchQueries: true
+    })
+
+    setOpenLinkDialog(false)
+  }
+
+  const openUrlDialog = (link) => {
+    setUrlOpenLinkDialog({
+      ...openUrlLinkDialog,
+      open: true,
+      provider: link.socialProvider,
+      url: link
+    })
+  }
+
+  const onUrlLinkDialogClose = () => {
+    setUrlOpenLinkDialog({
+      ...openUrlLinkDialog,
+      open: false
+    })
+  }
+
+  const onUrlLinkDialogSave = async (url, link) => {
+    await editUserLink({
+      variables: {
+        data: {url: url, id: link.id}
+      },
+      refetchQueries: [{query: CURRENT_USER}],
+      awaitRefetchQueries: true
+    })
+
+    setUrlOpenLinkDialog({
+      ...openUrlLinkDialog,
+      open: false
+    })
+  }
+
+  const onUrlLinkDelete = async (link) => {
+    await deleteUserLink({
+      variables: {
+        id: link.id
+      },
+      refetchQueries: [{query: CURRENT_USER}],
+      awaitRefetchQueries: true
+    })
+
+    setUrlOpenLinkDialog({
+      ...openUrlLinkDialog,
+      open: false
+    })
+  }
+
+  const renderLinks = (links) => {
+    return links.map((link) => {
+      return (
+        <Grid item key={link.id}>
+          <div className={classes.simpleIcon} onClick={() => openUrlDialog(link)}>
+            <SimpleIcon color="#25304c" name={link.socialProvider.name} />
+          </div>
+        </Grid>
+      )
+    })
+  }
+
+  const urlValidationErrors = errorFormatting(addUserLinkInfo.error);
+  const editUrlValidationErrors = errorFormatting(editUserLinkInfo.error);
 
   return (
     <div>
@@ -121,6 +210,14 @@ function EditProfile (props: Props) {
                   rows={3}
                   rowsMax={10}
                 />
+                { user && user.links.length > 0 && 
+                  <Grid container className={classes.icons} spacing={1}>
+                    { renderLinks(user.links) }
+                  </Grid>
+                }
+                <Button variant="outlined" className={classes.addLinkButton} onClick={() => setOpenLinkDialog(true)}>
+                  <PlusCircleIcon />&nbsp; Add Link
+                </Button>
               </CardContent>
               <CardActions>
                 <Grid container alignItems="center" justify="space-between">
@@ -136,6 +233,21 @@ function EditProfile (props: Props) {
               </CardActions>
             </Card>
             <AssetsDialog type="UserAvatar" open={dialogOpen} onClose={() => setDialogOpen(false)} onSelect={handleAssetSelect} />
+            <LinkAddUrlModal 
+              open={openUrlLinkDialog.open} 
+              onDelete={onUrlLinkDelete} 
+              onClose={onUrlLinkDialogClose} 
+              onSave={onUrlLinkDialogSave} 
+              loading={editUserLinkInfo.loading || deleteUserLinkInfo.loading} 
+              error={editUrlValidationErrors} 
+              provider={openUrlLinkDialog.provider} 
+              url={openUrlLinkDialog.url} />
+            <LinkAddModal 
+              open={openLinkDialog} 
+              onClose={onLinkDialogClose} 
+              onSave={onLinkDialogSave} 
+              loading={addUserLinkInfo.loading} 
+              error={urlValidationErrors} />
           </form>
         </div>
       </Container>

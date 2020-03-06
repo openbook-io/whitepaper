@@ -17,6 +17,20 @@ export interface UPDATE_USER_MUTATION_updateMe_avatar {
   type: string;
 }
 
+export interface UPDATE_USER_MUTATION_updateMe_links_socialProvider {
+  __typename: "SocialProvider";
+  id: string;
+  name: string;
+  iconName: string;
+}
+
+export interface UPDATE_USER_MUTATION_updateMe_links {
+  __typename: "UserLink";
+  id: string;
+  url: string;
+  socialProvider: UPDATE_USER_MUTATION_updateMe_links_socialProvider;
+}
+
 export interface UPDATE_USER_MUTATION_updateMe {
   __typename: "User";
   id: string;
@@ -25,6 +39,7 @@ export interface UPDATE_USER_MUTATION_updateMe {
   lastName: string;
   bio: string | null;
   website: string | null;
+  links: UPDATE_USER_MUTATION_updateMe_links[];
 }
 
 export interface UPDATE_USER_MUTATION {

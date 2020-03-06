@@ -15,6 +15,20 @@ export interface UserFragment_avatar {
   type: string;
 }
 
+export interface UserFragment_links_socialProvider {
+  __typename: "SocialProvider";
+  id: string;
+  name: string;
+  iconName: string;
+}
+
+export interface UserFragment_links {
+  __typename: "UserLink";
+  id: string;
+  url: string;
+  socialProvider: UserFragment_links_socialProvider;
+}
+
 export interface UserFragment {
   __typename: "User";
   id: string;
@@ -23,4 +37,5 @@ export interface UserFragment {
   lastName: string;
   bio: string | null;
   website: string | null;
+  links: UserFragment_links[];
 }
