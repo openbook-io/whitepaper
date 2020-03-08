@@ -5,6 +5,12 @@ const CRYPTOCURRENCY_FRAGMENT = gql`
     id
     name
     ticker
+    isOnExchange
+    cryptoDataCoin {
+      name
+      symbol
+      id
+    }
   }
 `
 

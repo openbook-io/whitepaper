@@ -1,4 +1,5 @@
 import React, {useState, ChangeEvent} from 'react';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import { 
   withStyles, 
   WithStyles,
@@ -8,8 +9,12 @@ import {
   TextField,
   Button,
   CircularProgress,
-  Grid
+  Grid,
+  FormControlLabel,
+  Switch
 } from '@material-ui/core';
+import { useLazyQuery } from '@apollo/react-hooks';
+import { SEARCH_CRYPTO_DATA_COIN } from '@whitepaper/queries';
 import style from './style';
 
 interface Props extends WithStyles<typeof style> {
@@ -24,8 +29,13 @@ function AddCoin (props: Props) {
 
   const [values, setValues] = useState({
     name: coin && (coin.name  || ''),
-    ticker: coin && (coin.ticker  || '')
+    ticker: coin && (coin.ticker  || ''),
+    isOnExchange: coin && (coin.isOnExchange  || false),
+    coinDataId: coin && coin.cryptoDataCoin && coin.cryptoDataCoin.id
   })
+
+  const [searchCrypto, searchCryptoInfo] = useLazyQuery(SEARCH_CRYPTO_DATA_COIN)
+  const [coinData, setCoinData] = useState(coin && coin.cryptoDataCoin);
 
   const handleChangeText = (event: ChangeEvent<HTMLInputElement>) => {
     setValues({
@@ -42,9 +52,35 @@ function AddCoin (props: Props) {
   };
 
   const handleSave = () => {
-    onSave({
+    const data = {
       ...values,
       ...(coin) && {id: coin.id}
+    }
+
+    onSave(data);
+  }
+
+  const handleChangeSwitch = event => {
+    setCoinData(null);
+    setValues({
+      ...values,
+      isOnExchange: event.target.checked,
+      ...(!event.target.checked) && {coinDataId: null}
+    });
+  };
+
+  const handleAutocompleteTextChange = event => {
+    if(searchCryptoInfo.loading) return
+    
+    searchCrypto({variables: {search: event.target.value}});
+  };
+
+  const handleAutocompleteChange = (event, newValue) => {
+    setCoinData(newValue);
+    setValues({
+      ...values,
+      ticker: (newValue && newValue.symbol) || null,
+      coinDataId: (newValue && newValue.id) || null
     });
   }
 
@@ -61,15 +97,51 @@ function AddCoin (props: Props) {
           value={values.name}
           onChange={handleChangeText}
         />
-        <TextField
-          fullWidth
-          label="Ticker Name"
-          placeholder="BTC, ETH, XRP etc.."
-          type="text"
-          name="ticker"
-          value={values.ticker}
-          onChange={handleChangeTicker}
+        <FormControlLabel
+          className={classes.textField}
+          control={
+            <Switch
+              checked={values.isOnExchange}
+              onChange={handleChangeSwitch}
+              value="checkedB"
+              color="primary"
+            />
+          }
+          label="Is this coin listed on an exchange?"
         />
+        { !values.isOnExchange && 
+          <TextField
+            fullWidth
+            label="Ticker Name"
+            placeholder="BTC, ETH, XRP etc.."
+            type="text"
+            name="ticker"
+            value={values.ticker}
+            onChange={handleChangeTicker}
+          />
+        }
+        { values.isOnExchange &&
+          <Autocomplete
+            options={(searchCryptoInfo.data && searchCryptoInfo.data.searchCryptoDataCoins) || []}
+            getOptionLabel={option => option.symbol}
+            filterOptions={x => x}
+            autoComplete
+            includeInputInList
+            onChange={handleAutocompleteChange}
+            loading={searchCryptoInfo.loading}
+            value={coinData}
+            disableOpenOnFocus
+            renderInput={params => (
+              <TextField
+                {...params}
+                label="Ticker Name"
+                placeholder="BTC, ETH, XRP etc.."
+                onChange={handleAutocompleteTextChange}
+                fullWidth
+              />
+            )}
+          />
+        }
       </CardContent>
       <CardActions>
         <Grid container alignItems="center" justify="space-between">
