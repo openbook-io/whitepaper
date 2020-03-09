@@ -1,10 +1,21 @@
 import React from 'react';
 import { 
   withStyles, 
-  WithStyles
+  WithStyles,
+  Grid,
+  Button,
+  Table,
+  TableBody,
+  TableHead,
+  TableRow,
+  TableCell,
+  Paper,
+  TableContainer,
+  IconButton
 } from '@material-ui/core';
 import style from './style';
 import { Link } from "@reach/router";
+import PencilIcon from 'mdi-react/PencilIcon';
 
 interface Props extends WithStyles<typeof style> {
   cryptocurrencies: any
@@ -15,10 +26,48 @@ function Cryptocurrencies (props: Props) {
 
   return (
     <div className={classes.outer}>
-      <h1>Cryptocurrencies</h1>
-      {cryptocurrencies.map((cryptocurrency: any, index) => {
-        return (<div key={index}>{cryptocurrency.name} <Link to={`/edit-coin/${cryptocurrency.id}`}>edit</Link></div>)
-      })}
+      <Grid container alignItems="center" justify="space-between">
+        <Grid item>
+          <h1 className={classes.title}>Coins</h1>
+        </Grid>
+        <Grid item>
+          <Link to="/add-coin" className={classes.link}>
+            <Button variant="contained" color="secondary">Add Coin</Button>
+          </Link>
+        </Grid>
+      </Grid>
+      <TableContainer component={Paper} className={classes.table}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>
+                Name
+              </TableCell>
+              <TableCell>
+                Ticker
+              </TableCell>
+              <TableCell />
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {cryptocurrencies.map((cryptocurrency: any, index) => {
+              return (
+                <TableRow key={index}>
+                  <TableCell>{cryptocurrency.name}</TableCell>
+                  <TableCell>{cryptocurrency.ticker}</TableCell>
+                  <TableCell align="right">
+                    <Link to={`/edit-coin/${cryptocurrency.id}`}>
+                      <IconButton>
+                        <PencilIcon />
+                      </IconButton>
+                    </Link>
+                  </TableCell>
+                </TableRow>
+              )
+            })}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   );
 }
