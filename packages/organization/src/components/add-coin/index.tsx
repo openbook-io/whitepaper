@@ -11,7 +11,8 @@ import {
   CircularProgress,
   Grid,
   FormControlLabel,
-  Switch
+  Switch,
+  Snackbar
 } from '@material-ui/core';
 import { useLazyQuery } from '@apollo/react-hooks';
 import { SEARCH_CRYPTO_DATA_COIN } from '@whitepaper/queries';
@@ -34,7 +35,8 @@ function AddCoin (props: Props) {
     coinDataId: coin && coin.cryptoDataCoin && coin.cryptoDataCoin.id
   })
 
-  const [searchCrypto, searchCryptoInfo] = useLazyQuery(SEARCH_CRYPTO_DATA_COIN)
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [searchCrypto, searchCryptoInfo] = useLazyQuery(SEARCH_CRYPTO_DATA_COIN);
   const [coinData, setCoinData] = useState(coin && coin.cryptoDataCoin);
 
   const handleChangeText = (event: ChangeEvent<HTMLInputElement>) => {
@@ -51,13 +53,14 @@ function AddCoin (props: Props) {
     });
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     const data = {
       ...values,
       ...(coin) && {id: coin.id}
     }
 
-    onSave(data);
+    await onSave(data);
+    setOpenSnackbar(true);
   }
 
   const handleChangeSwitch = event => {
@@ -85,77 +88,86 @@ function AddCoin (props: Props) {
   }
 
   return (
-    <Card>
-      <CardContent>
-        <TextField
-          className={classes.textField}
-          fullWidth
-          label="Coin Name"
-          placeholder="Bitcoin, Ethereum, Ripple etc.."
-          type="text"
-          name="name"
-          value={values.name}
-          onChange={handleChangeText}
-        />
-        <FormControlLabel
-          className={classes.textField}
-          control={
-            <Switch
-              checked={values.isOnExchange}
-              onChange={handleChangeSwitch}
-              value="checkedB"
-              color="primary"
+    <React.Fragment>
+      <Card>
+        <CardContent>
+          <TextField
+            className={classes.textField}
+            fullWidth
+            label="Coin Name"
+            placeholder="Bitcoin, Ethereum, Ripple etc.."
+            type="text"
+            name="name"
+            value={values.name}
+            onChange={handleChangeText}
+          />
+          <FormControlLabel
+            className={classes.textField}
+            control={
+              <Switch
+                checked={values.isOnExchange}
+                onChange={handleChangeSwitch}
+                value="checkedB"
+                color="primary"
+              />
+            }
+            label="Is this coin listed on an exchange?"
+          />
+          { !values.isOnExchange && 
+            <TextField
+              fullWidth
+              label="Ticker Name"
+              placeholder="BTC, ETH, XRP etc.."
+              type="text"
+              name="ticker"
+              value={values.ticker}
+              onChange={handleChangeTicker}
             />
           }
-          label="Is this coin listed on an exchange?"
-        />
-        { !values.isOnExchange && 
-          <TextField
-            fullWidth
-            label="Ticker Name"
-            placeholder="BTC, ETH, XRP etc.."
-            type="text"
-            name="ticker"
-            value={values.ticker}
-            onChange={handleChangeTicker}
-          />
-        }
-        { values.isOnExchange &&
-          <Autocomplete
-            options={(searchCryptoInfo.data && searchCryptoInfo.data.searchCryptoDataCoins) || []}
-            getOptionLabel={option => option.symbol}
-            filterOptions={x => x}
-            autoComplete
-            includeInputInList
-            onChange={handleAutocompleteChange}
-            loading={searchCryptoInfo.loading}
-            value={coinData}
-            disableOpenOnFocus
-            renderInput={params => (
-              <TextField
-                {...params}
-                label="Ticker Name"
-                placeholder="BTC, ETH, XRP etc.."
-                onChange={handleAutocompleteTextChange}
-                fullWidth
-              />
-            )}
-          />
-        }
-      </CardContent>
-      <CardActions>
-        <Grid container alignItems="center" justify="space-between">
-          <Grid item>
-            <Button type="submit" color="secondary" variant="contained" disabled={loading} onClick={handleSave}>{edit ? 'Update Coin' : 'Save Coin'}</Button>
-          </Grid>
-          {loading && 
-            <Grid item>
-              <CircularProgress size={30} />
-            </Grid>
+          { values.isOnExchange &&
+            <Autocomplete
+              options={(searchCryptoInfo.data && searchCryptoInfo.data.searchCryptoDataCoins) || []}
+              getOptionLabel={option => `${option.symbol}`}
+              filterOptions={x => x}
+              autoComplete
+              includeInputInList
+              onChange={handleAutocompleteChange}
+              loading={searchCryptoInfo.loading}
+              value={coinData}
+              disableOpenOnFocus
+              renderInput={params => (
+                <TextField
+                  {...params}
+                  label="Ticker Name"
+                  placeholder="BTC, ETH, XRP etc.."
+                  onChange={handleAutocompleteTextChange}
+                  fullWidth
+                />
+              )}
+            />
           }
-        </Grid>
-      </CardActions>
-    </Card>
+        </CardContent>
+        <CardActions>
+          <Grid container alignItems="center" justify="space-between">
+            <Grid item>
+              <Button type="submit" color="secondary" variant="contained" disabled={loading} onClick={handleSave}>{edit ? 'Update Coin' : 'Save Coin'}</Button>
+            </Grid>
+            {loading && 
+              <Grid item>
+                <CircularProgress size={30} />
+              </Grid>
+            }
+          </Grid>
+        </CardActions>
+      </Card>
+      <Snackbar
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        open={openSnackbar}
+        autoHideDuration={3000}
+        onClose={() => setOpenSnackbar(false)}
+        message="Saved Coin"
+      />
+    </React.Fragment>
   );
 }
 
