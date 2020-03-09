@@ -7,7 +7,7 @@ import {
 } from '@material-ui/core';
 import style from './style';
 import { useMutation } from '@apollo/react-hooks';
-import { CREATE_CRYPTOCURRENCY } from '@whitepaper/queries';
+import { CREATE_CRYPTOCURRENCY, MY_CRYPTOCURRENCIES } from '@whitepaper/queries';
 
 interface Props extends RouteComponentProps, WithStyles<typeof style> {}
 
@@ -17,7 +17,9 @@ function AddCoinPage(props: Props) {
 
   const handleSave = async (coin: any) => {
     await saveCoin({
-      variables: {data: coin}
+      variables: {data: coin},
+      refetchQueries: [{query: MY_CRYPTOCURRENCIES}],
+      awaitRefetchQueries: true
     })
 
     navigate!('/my-coins')
