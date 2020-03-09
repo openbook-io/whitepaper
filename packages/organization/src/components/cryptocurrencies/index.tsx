@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   withStyles, 
   WithStyles,
@@ -11,11 +11,17 @@ import {
   TableCell,
   Paper,
   TableContainer,
-  IconButton
+  IconButton,
+  Dialog,
+  DialogContent,
+  DialogActions,
+  DialogContentText
 } from '@material-ui/core';
 import style from './style';
 import { Link } from "@reach/router";
 import PencilIcon from 'mdi-react/PencilIcon';
+import DeleteIcon from 'mdi-react/DeleteIcon';
+import { Transition, DialogTitle } from '@whitepaper/ui';
 
 interface Props extends WithStyles<typeof style> {
   cryptocurrencies: any
@@ -23,6 +29,15 @@ interface Props extends WithStyles<typeof style> {
 
 function Cryptocurrencies (props: Props) {
   const { classes, cryptocurrencies } = props;
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <div className={classes.outer}>
@@ -61,6 +76,9 @@ function Cryptocurrencies (props: Props) {
                         <PencilIcon />
                       </IconButton>
                     </Link>
+                    <IconButton onClick={handleClickOpen}>
+                      <DeleteIcon />
+                    </IconButton>
                   </TableCell>
                 </TableRow>
               )
@@ -68,6 +86,27 @@ function Cryptocurrencies (props: Props) {
           </TableBody>
         </Table>
       </TableContainer>
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+      >
+        <DialogTitle>{"Delete Coin"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want to delete this coin? You can't undo this process
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            No
+          </Button>
+          <Button onClick={handleClose} color="primary">
+            Yes
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }

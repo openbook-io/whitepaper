@@ -11,7 +11,7 @@ export default () => ({
     root: {
       borderBottom: '1px solid #dfe3e8',
       '&$selected': {
-        backgroundColor: '#fff'
+        //backgroundColor: '#fff'
       },
       '&:hover': {
         backgroundColor: '#f9f9fb'
@@ -27,7 +27,7 @@ export default () => ({
   MuiTableCell: {
     root: {
       padding: '4px 20px',
-      border: 'none'
+      borderBottom: 'none',
     },
     head: {
       color: '#000',
