@@ -9,13 +9,15 @@ import {
   Select,
   MenuItem,
   FormControl,
-  TextField
+  TextField,
+  Grid,
+  CircularProgress
 } from '@material-ui/core';
 import style from './style';
 import { DialogTitle, Transition } from '@whitepaper/ui';
-import { GET_DOCUMENT_TYPES } from '@whitepaper/queries';
+import { GET_DOCUMENT_TYPES, CREATE_DOCUMENT } from '@whitepaper/queries';
 import { useGlobalState } from '../../state';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 
 interface Props extends WithStyles<typeof style> {}
 
@@ -23,6 +25,7 @@ function DialogCreateDocument (props: Props) {
   const { classes } = props;
   const [dialogCreateDocument, setDialogCreateDocument] = useGlobalState('dialogCreateDocument');
   const documentTypes = useQuery(GET_DOCUMENT_TYPES);
+  const [createDocument, {loading}] = useMutation(CREATE_DOCUMENT);
   const [values, setValues] = useState({
     type: 0,
     text: '',
@@ -40,6 +43,23 @@ function DialogCreateDocument (props: Props) {
       [event.target.name]: event.target.value
     });
   };
+
+  const saveDocument = async () => {
+    if(values.type > 0 && !documentTypes.loading) {
+      const type = documentTypes.data.getDocumentTypes[values.type - 1];
+
+      const docummentResults = await createDocument({
+        variables: {
+          data: {
+            documentTypeText: type.textAllowed ? values.text: '',
+            documentTypeId: type.id
+          }
+        }
+      });
+
+      setDialogCreateDocument(false)
+    }
+  }
 
   return (
     <Dialog 
@@ -84,8 +104,15 @@ function DialogCreateDocument (props: Props) {
       </DialogContent>
       <DialogActions>
         <Button variant="contained" onClick={closeDialog}>Cancel</Button>
-        <Button color="primary" variant="contained">Create Document</Button>
+        <Button color="primary" variant="contained" onClick={saveDocument}>Create Document</Button>
       </DialogActions>
+      { loading && 
+      <Grid container alignItems="center" justify="center" className={classes.loadingOverlay}>
+        <Grid item>
+          <CircularProgress />
+        </Grid>
+      </Grid>
+      }
     </Dialog>
   );
 }

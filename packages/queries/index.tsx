@@ -8,6 +8,7 @@ export * from './src/queries/user';
 export * from './src/queries/socialProvider';
 export * from './src/queries/cryptoData';
 export * from './src/queries/documentTypes';
+export * from './src/queries/document';
 
 /* Export Types */
 export * from './src/types/OrganizationFragment';
