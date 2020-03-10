@@ -15,13 +15,16 @@ import {
   Dialog,
   DialogContent,
   DialogActions,
-  DialogContentText
+  DialogContentText,
+  CircularProgress
 } from '@material-ui/core';
 import style from './style';
 import { Link } from "@reach/router";
 import PencilIcon from 'mdi-react/PencilIcon';
 import DeleteIcon from 'mdi-react/DeleteIcon';
 import { Transition, DialogTitle } from '@whitepaper/ui';
+import { useMutation } from '@apollo/react-hooks';
+import { REMOVE_CRYPTOCURRENCY, MY_CRYPTOCURRENCIES } from '@whitepaper/queries';
 
 interface Props extends WithStyles<typeof style> {
   cryptocurrencies: any
@@ -29,15 +32,48 @@ interface Props extends WithStyles<typeof style> {
 
 function Cryptocurrencies (props: Props) {
   const { classes, cryptocurrencies } = props;
-  const [open, setOpen] = useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  const [removeCryptocurrency, {loading}] = useMutation(REMOVE_CRYPTOCURRENCY)
+  const [dialog, setDialog] = useState({
+    open: false,
+    coin: null
+  });
+
+  const handleClickOpen = (coin) => {
+    setDialog({
+      open: true,
+      coin: coin
+    });
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setDialog({
+      ...dialog,
+      open: false
+    });
   };
+
+  const handleExited = () => {
+    setDialog({
+      ...dialog,
+      coin: null
+    });
+  }
+
+  const handleDeleteCoin = async () => {
+    await removeCryptocurrency({
+      variables: {
+        id: dialog.coin.id
+      },
+      refetchQueries: [{query: MY_CRYPTOCURRENCIES}],
+      awaitRefetchQueries: true
+    })
+
+    setDialog({
+      ...dialog,
+      open: false
+    });
+  }
 
   return (
     <div className={classes.outer}>
@@ -76,7 +112,7 @@ function Cryptocurrencies (props: Props) {
                         <PencilIcon />
                       </IconButton>
                     </Link>
-                    <IconButton onClick={handleClickOpen}>
+                    <IconButton onClick={() => handleClickOpen(cryptocurrency)}>
                       <DeleteIcon />
                     </IconButton>
                   </TableCell>
@@ -87,12 +123,13 @@ function Cryptocurrencies (props: Props) {
         </Table>
       </TableContainer>
       <Dialog
-        open={open}
+        open={dialog.open}
+        onExited={handleExited}
         TransitionComponent={Transition}
         keepMounted
         onClose={handleClose}
       >
-        <DialogTitle>{"Delete Coin"}</DialogTitle>
+        <DialogTitle>{`Delete Coin ${dialog.coin && dialog.coin.name}`}</DialogTitle>
         <DialogContent>
           <DialogContentText>
             Are you sure you want to delete this coin? You can't undo this process
@@ -102,10 +139,17 @@ function Cryptocurrencies (props: Props) {
           <Button onClick={handleClose} color="primary">
             No
           </Button>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleDeleteCoin} color="primary">
             Yes
           </Button>
         </DialogActions>
+        {loading && 
+          <Grid container alignItems="center" justify="center" className={classes.loadingOverlay}>
+            <Grid item>
+              <CircularProgress />
+            </Grid>
+          </Grid>
+        }
       </Dialog>
     </div>
   );

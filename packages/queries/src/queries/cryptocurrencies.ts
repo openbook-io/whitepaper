@@ -24,6 +24,12 @@ const CREATE_CRYPTOCURRENCY = gql`
   ${CRYPTOCURRENCY_FRAGMENT}
 `;
 
+const REMOVE_CRYPTOCURRENCY = gql`
+  mutation REMOVE_CRYPTOCURRENCY_MUTATION($id: ID!) {
+    removeCryptocurrency(id: $id)
+  }
+`;
+
 const EDIT_CRYPTOCURRENCY = gql`
   mutation EDIT_CRYPTOCURRENCY_MUTATION($data: CryptocurrencyEditInput!) {
     editCryptocurrency(data: $data) {
@@ -58,5 +64,6 @@ export {
   CREATE_CRYPTOCURRENCY,
   MY_CRYPTOCURRENCIES,
   MY_CRYPTOCURRENCY,
-  EDIT_CRYPTOCURRENCY
+  EDIT_CRYPTOCURRENCY,
+  REMOVE_CRYPTOCURRENCY
 };
