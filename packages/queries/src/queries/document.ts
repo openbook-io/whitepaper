@@ -12,8 +12,8 @@ const DOCUMENT_FRAGMENT = gql`
   }
 `
 
-const GET_DOCUMENT = gql`
-  query GET_DOCUMENT_QUERY {
+const GET_DOCUMENTS = gql`
+  query GET_DOCUMENTS_QUERY {
     myDocuments {
       ...DocumentFragment
     }
@@ -33,6 +33,6 @@ const CREATE_DOCUMENT = gql`
 `;
 
 export { 
-  GET_DOCUMENT,
+  GET_DOCUMENTS,
   CREATE_DOCUMENT
 };
