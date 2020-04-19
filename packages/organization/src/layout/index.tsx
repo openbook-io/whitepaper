@@ -5,6 +5,7 @@ import MyCoins from '../containers/my-coins';
 import AddCoin from '../containers/add-coin';
 import AddDocumentVersion from '../containers/add-document-version';
 import EditCoin from '../containers/edit-coin';
+import DocumentVersion from '../containers/document-version';
 import EditProfile from '../containers/edit-profile';
 import Sidebar from '../components/sidebar';
 import Header from '../components/header';
@@ -37,11 +38,12 @@ function Layout(props: Props) {
               <div className={classes.toolbar} />
               <main className={classes.content}>
                 <div className={classes.container}>
-                  <Router>
+                  <Router primary={false}>
                     <Home path="/" />
                     <MyCoins path="/my-coins" />
                     <AddCoin path="/add-coin" />
                     <AddDocumentVersion path="/add-document-version/:documentId" />
+                    <DocumentVersion path="/document-version/:documentVersionId" />
                     <EditCoin path="/edit-coin/:coinId" />
                     <EditProfile path="/edit-profile" />
                   </Router>

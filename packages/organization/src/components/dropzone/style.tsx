@@ -36,6 +36,16 @@ const styles = (theme: Theme) => createStyles({
   dropButtonIcon: {
     marginRight: 10
   },
+  progress: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(255, 255, 255, 1)',
+    borderRadius: '4px',
+    textAlign: 'center'
+  },
 })
 
 export default styles

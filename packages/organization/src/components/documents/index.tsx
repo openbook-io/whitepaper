@@ -3,21 +3,11 @@ import {
   withStyles, 
   WithStyles,
   Grid,
-  Button,
-  Table,
-  TableBody,
-  TableHead,
-  TableRow,
-  TableCell,
-  Paper,
-  TableContainer,
-  IconButton,
+  Button
 } from '@material-ui/core';
 import style from './style';
-import { Link } from "@reach/router";
-import PencilIcon from 'mdi-react/PencilIcon';
-import CloudUploadIcon from 'mdi-react/CloudUploadIcon';
 import { useGlobalState } from '../../state';
+import Document from '../document';
 
 interface Props extends WithStyles<typeof style> {
   documents: any
@@ -42,38 +32,7 @@ function Documents (props: Props) {
           <Button onClick={createDocument} variant="contained" color="secondary">Create Document</Button>
         </Grid>
       </Grid>
-      <TableContainer component={Paper} className={classes.table}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>
-                ID
-              </TableCell>
-              <TableCell>
-                Type
-              </TableCell>
-              <TableCell />
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {documents.map((document: any, index) => {
-              return (
-                <TableRow key={index}>
-                  <TableCell>{document.id}</TableCell>
-                  <TableCell>{document.type.name}</TableCell>
-                  <TableCell align="right">
-                    <Link to={`/add-document-version/${document.id}`}>
-                      <IconButton>
-                        <CloudUploadIcon />
-                      </IconButton>
-                    </Link>
-                  </TableCell>
-                </TableRow>
-              )
-            })}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      { documents.map((document, index) => <Document document={document} key={index} />)}
     </div>
   );
 }

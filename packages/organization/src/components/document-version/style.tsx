@@ -1,8 +1,13 @@
 import { createStyles, Theme } from '@material-ui/core/styles';
 
 const styles = (theme: Theme) => createStyles({
-  container: {
-    paddingTop: 40
+  outer: {
+
+  },
+  pdf: {
+    width: '100%',
+    height: '100vh',
+    position: 'relative'
   }
 })
 

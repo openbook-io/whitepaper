@@ -1,4 +1,5 @@
 import gql from 'graphql-tag';
+import { DOCUMENT_VERSION_FRAGMENT } from './documentVersion';
 
 const DOCUMENT_FRAGMENT = gql`
   fragment DocumentFragment on Document {
@@ -8,8 +9,13 @@ const DOCUMENT_FRAGMENT = gql`
       name
     }
     typeText
+    versions {
+      ...DocumentVersionFragment
+    }
     createdAt
   }
+
+  ${DOCUMENT_VERSION_FRAGMENT}
 `
 
 const GET_DOCUMENTS = gql`

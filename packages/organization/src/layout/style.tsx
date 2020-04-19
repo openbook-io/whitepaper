@@ -6,13 +6,10 @@ const styles = (theme: Theme) => createStyles({
   },
   content: {
     flexGrow: 1,
-    padding: 30,
     marginLeft: '73px'
   },
   container: {
-    maxWidth: '1024px',
-    margin: '0px auto',
-    boxSizing: 'border-box'
+
   }
 })
 

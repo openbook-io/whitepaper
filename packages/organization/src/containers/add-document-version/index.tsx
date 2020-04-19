@@ -16,7 +16,7 @@ function AddDocumentVersionPage(props: Props) {
 
   return (
     <div className={classes.main}>
-      <AddDocumentVersion />
+      <AddDocumentVersion documentId={documentId} />
     </div>
   )
 }
