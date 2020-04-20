@@ -7,6 +7,7 @@ import {
   Typography,
   Button
 } from '@material-ui/core';
+import Link from 'next/link';
 import style from './style';
 import { useUser } from '../../../utils/userContext';
 
@@ -50,7 +51,11 @@ function Document(props: Props) {
               Language: {showingVersion.language.name}
             </Typography>
           </div>
-          <Button variant="contained" color="primary" onClick={() => console.log('click Button')}>View Document</Button>
+          <Link href="/document/[id]" as={`/document/${showingVersion.id}`}>
+            <a>
+              <Button variant="contained" color="primary" onClick={() => console.log('click Button')}>View Document</Button>
+            </a>
+          </Link>
         </Grid>
       </Grid>
     </Paper>
