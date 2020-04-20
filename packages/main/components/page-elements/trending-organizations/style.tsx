@@ -17,6 +17,9 @@ const styles = (theme: Theme) => createStyles({
   },
   paper: {
     padding: 30
+  },
+  link: {
+    textDecoration: 'none'
   }
 })
 
