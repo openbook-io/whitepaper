@@ -38,7 +38,18 @@ const CREATE_DOCUMENT = gql`
   ${DOCUMENT_FRAGMENT}
 `;
 
+const GET_DOCUMENTS_BY_ORGANIZATION_SLUG = gql`
+  query GET_DOCUMENTS_BY_ORGANIZATION_SLUG_QUERY($slug: String!) {
+    getDocumentsByOrganizationSlug(slug: $slug) {
+      ...DocumentFragment
+    }
+  }
+
+  ${DOCUMENT_FRAGMENT}
+`;
+
 export { 
   GET_DOCUMENTS,
-  CREATE_DOCUMENT
+  CREATE_DOCUMENT,
+  GET_DOCUMENTS_BY_ORGANIZATION_SLUG
 };

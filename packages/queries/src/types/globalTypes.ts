@@ -17,14 +17,32 @@ export interface ChangePasswordInput {
   token: string;
 }
 
+export interface CreateDocumentInput {
+  documentTypeText?: string | null;
+  documentTypeId: string;
+}
+
+export interface CreateDocumentVersionInput {
+  version: string;
+  title: string;
+  description?: string | null;
+  pdfId: string;
+  documentId: string;
+  languageId: string;
+}
+
 export interface CryptocurrencyCreateInput {
   name: string;
   ticker: string;
+  isOnExchange: boolean;
+  coinDataId?: string | null;
 }
 
 export interface CryptocurrencyEditInput {
   name: string;
   ticker: string;
+  isOnExchange: boolean;
+  coinDataId?: string | null;
   id: string;
 }
 

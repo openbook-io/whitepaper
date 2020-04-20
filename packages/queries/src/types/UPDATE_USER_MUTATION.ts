@@ -17,6 +17,11 @@ export interface UPDATE_USER_MUTATION_updateMe_avatar {
   type: string;
 }
 
+export interface UPDATE_USER_MUTATION_updateMe_defaultLanguage {
+  __typename: "Language";
+  id: string;
+}
+
 export interface UPDATE_USER_MUTATION_updateMe_links_socialProvider {
   __typename: "SocialProvider";
   id: string;
@@ -39,6 +44,7 @@ export interface UPDATE_USER_MUTATION_updateMe {
   lastName: string;
   bio: string | null;
   website: string | null;
+  defaultLanguage: UPDATE_USER_MUTATION_updateMe_defaultLanguage | null;
   links: UPDATE_USER_MUTATION_updateMe_links[];
 }
 

@@ -17,6 +17,11 @@ export interface LOGIN_MUTATION_login_user_avatar {
   type: string;
 }
 
+export interface LOGIN_MUTATION_login_user_defaultLanguage {
+  __typename: "Language";
+  id: string;
+}
+
 export interface LOGIN_MUTATION_login_user_links_socialProvider {
   __typename: "SocialProvider";
   id: string;
@@ -39,6 +44,7 @@ export interface LOGIN_MUTATION_login_user {
   lastName: string;
   bio: string | null;
   website: string | null;
+  defaultLanguage: LOGIN_MUTATION_login_user_defaultLanguage | null;
   links: LOGIN_MUTATION_login_user_links[];
 }
 

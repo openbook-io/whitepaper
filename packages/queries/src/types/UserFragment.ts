@@ -15,6 +15,11 @@ export interface UserFragment_avatar {
   type: string;
 }
 
+export interface UserFragment_defaultLanguage {
+  __typename: "Language";
+  id: string;
+}
+
 export interface UserFragment_links_socialProvider {
   __typename: "SocialProvider";
   id: string;
@@ -37,5 +42,6 @@ export interface UserFragment {
   lastName: string;
   bio: string | null;
   website: string | null;
+  defaultLanguage: UserFragment_defaultLanguage | null;
   links: UserFragment_links[];
 }

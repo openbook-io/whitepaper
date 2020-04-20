@@ -13,6 +13,9 @@ const USER_FRAGMENT = gql`
     lastName
     bio
     website
+    defaultLanguage {
+      id
+    }
     links {
       id
       url

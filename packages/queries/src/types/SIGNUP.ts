@@ -17,6 +17,11 @@ export interface SIGNUP_register_user_avatar {
   type: string;
 }
 
+export interface SIGNUP_register_user_defaultLanguage {
+  __typename: "Language";
+  id: string;
+}
+
 export interface SIGNUP_register_user_links_socialProvider {
   __typename: "SocialProvider";
   id: string;
@@ -39,6 +44,7 @@ export interface SIGNUP_register_user {
   lastName: string;
   bio: string | null;
   website: string | null;
+  defaultLanguage: SIGNUP_register_user_defaultLanguage | null;
   links: SIGNUP_register_user_links[];
 }
 

@@ -15,6 +15,11 @@ export interface CURRENT_USER_QUERY_me_avatar {
   type: string;
 }
 
+export interface CURRENT_USER_QUERY_me_defaultLanguage {
+  __typename: "Language";
+  id: string;
+}
+
 export interface CURRENT_USER_QUERY_me_links_socialProvider {
   __typename: "SocialProvider";
   id: string;
@@ -37,6 +42,7 @@ export interface CURRENT_USER_QUERY_me {
   lastName: string;
   bio: string | null;
   website: string | null;
+  defaultLanguage: CURRENT_USER_QUERY_me_defaultLanguage | null;
   links: CURRENT_USER_QUERY_me_links[];
 }
 

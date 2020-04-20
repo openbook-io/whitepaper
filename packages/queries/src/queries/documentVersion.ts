@@ -9,6 +9,7 @@ const DOCUMENT_VERSION_FRAGMENT = gql`
     language {
       id
       name
+      isFallback
     }
     pdf {
       id
@@ -30,7 +31,7 @@ const CREATE_DOCUMENT_VERSION = gql`
 
 const GET_DOCUMENT_VERSION = gql`
   query GET_DOCUMENT_VERSION_QUERY($documentVersionId: ID!) {
-    getDocumentVersion(documentVersionId: $documentVersionId) {
+    getMyDocumentVersion(documentVersionId: $documentVersionId) {
       ...DocumentVersionFragment
     }
   }
