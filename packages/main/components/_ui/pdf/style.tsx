@@ -5,7 +5,7 @@ const styles = (theme: Theme) => createStyles({
   },
   pdfContainer: {
     margin: '0px auto',
-    maxWidth: 800
+    maxWidth: 960
   }
 })
 
