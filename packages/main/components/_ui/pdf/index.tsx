@@ -1,10 +1,9 @@
 import React from 'react';
 import { 
   withStyles,
-  WithStyles,
-  Grid
+  WithStyles
 } from '@material-ui/core';
-import PdfPage from './page';
+import PdfPage from './components/page';
 import style from './style';
 
 interface Props extends WithStyles<typeof style> {

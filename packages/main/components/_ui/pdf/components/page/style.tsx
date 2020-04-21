@@ -22,7 +22,7 @@ const styles = (theme: Theme) => createStyles({
     '@global': {
       '.textLayer': {
         opacity: '0.6',
-        lineHeight: '1.0',
+        lineHeight: '1.1',
         margin: '0px auto'
       },
       '.textLayer > span': {

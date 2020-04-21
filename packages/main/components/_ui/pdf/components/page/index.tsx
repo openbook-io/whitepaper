@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import { 
   withStyles,
-  WithStyles,
-  Grid
+  WithStyles
 } from '@material-ui/core';
 import { useInView } from 'react-intersection-observer';
+import TextLayer from '../textLayer';
 import style from './style';
 
 interface Props extends WithStyles<typeof style> {
@@ -46,7 +46,7 @@ function PdfPage(props: Props) {
           {inView &&
             <img className={classes.pageImage} src={`https://assets.whitepaper-staging.com/pdfs-output/${documentId}/page-${page.number}-${page.key}.png`} />
           }
-          {textLayer && <div className={classes.textOuter} dangerouslySetInnerHTML={{__html: textLayer}} />}
+          {textLayer && <TextLayer textLayer={textLayer} />}
         </div>
       }
     </div>
