@@ -5,12 +5,14 @@ const styles = (theme: Theme) => createStyles({
     width: '100%',
     position: 'relative',
     marginTop: 40,
-    marginBottom: 40
+    marginBottom: 40,
+    userSelect: 'none'
   },
   page: {
     backgroundColor: '#fff',
     boxShadow: '0 1px 2px 1px rgba(0,0,0,.25)',
-    transformOrigin: 'top left'
+    transformOrigin: 'top left',
+    userSelect: 'none'
   },
   pageImage: {
     //imageRendering: 'pixelated'

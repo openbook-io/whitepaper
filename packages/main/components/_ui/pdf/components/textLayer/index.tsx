@@ -1,4 +1,5 @@
-import React, {useEffect, useState, useCallback} from 'react';
+import React, {useEffect, useCallback} from 'react';
+import ReactDom from "react-dom";
 import { 
   withStyles,
   WithStyles
@@ -6,6 +7,7 @@ import {
 import { debounce } from 'lodash';
 import getClientRects from "../../lib/get-client-rects";
 import getBoundingRect from "../../lib/get-bounding-rect";
+import { findOrCreateContainerLayer } from "../../lib/pdfjs-dom";
 import style from './style';
 
 interface Props extends WithStyles<typeof style> {
@@ -15,6 +17,34 @@ interface Props extends WithStyles<typeof style> {
 function TextLayer(props: Props) {
   const { classes, textLayer } = props;
   const textLayerRef = React.createRef<HTMLDivElement>();
+
+  const renderTipAtPosition = (position) => {
+    const { boundingRect } = position;
+
+    const page = {
+      node: textLayerRef.current
+    }
+
+    const pageBoundingRect = textLayerRef.current.getBoundingClientRect();
+
+    const tipNode = findOrCreateContainerLayer(
+      (textLayerRef.current.parentNode.parentNode as HTMLElement),
+      "PdfHighlighter__tip-layer"
+    );
+
+    ReactDom.render(
+      <div
+        className={classes.tooltip}
+        style={{
+          position: 'absolute',
+          left:
+            page.node.offsetLeft + boundingRect.left + boundingRect.width / 2,
+          top: boundingRect.top + page.node.offsetTop,
+          //bottom: boundingRect.top + page.node.offsetTop + boundingRect.height,
+        }}>Add Anotation</div>,
+      tipNode
+    );
+  }
 
   const afterSelection = (isCollapsed, range) => {
     if (!range || isCollapsed) {
@@ -29,7 +59,7 @@ function TextLayer(props: Props) {
 
     const boundingRect = getBoundingRect(rects);
     const viewportPosition = { boundingRect, rects };
-    console.log(viewportPosition)
+    renderTipAtPosition(viewportPosition)
   }
 
   const handler = useCallback(debounce(afterSelection, 500), []);
