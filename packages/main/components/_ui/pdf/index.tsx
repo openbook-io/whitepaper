@@ -15,7 +15,7 @@ function Pdf(props: Props) {
   const { classes, pdf } = props;
 
   const renderPages = pdf.pages.map((page) => {
-    return (<PdfPage page={page} documentId={pdf.documentId} />)
+    return (<PdfPage key={page.id} page={page} documentId={pdf.documentId} />)
   })
 
   return (
