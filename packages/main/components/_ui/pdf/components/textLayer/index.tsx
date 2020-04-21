@@ -47,7 +47,7 @@ function TextLayer(props: Props) {
   }
 
   const afterSelection = (isCollapsed, range) => {
-    if (!range || isCollapsed) {
+    if (!range || isCollapsed || (range && range.endOffset === 0)) {
       return;
     }
 
@@ -62,7 +62,7 @@ function TextLayer(props: Props) {
     renderTipAtPosition(viewportPosition)
   }
 
-  const handler = useCallback(debounce(afterSelection, 500), []);
+  const handler = useCallback(debounce(afterSelection, 800), []);
 
   const onSelectionChange = () => {
     const selection: Selection = window.getSelection();
