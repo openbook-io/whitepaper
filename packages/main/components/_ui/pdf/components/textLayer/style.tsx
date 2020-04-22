@@ -25,7 +25,14 @@ const styles = (theme: Theme) => createStyles({
         whiteSpace: 'pre',
         cursor: 'text',
         transformOrigin: '0% 0%',
-        userSelect: 'text'
+        userSelect: 'text',
+        '&:before': {
+          width: '150%',
+          height: '200%',
+          position: 'absolute',
+          top: '-10%',
+          content: '""'
+        }
       },
       '.textLayer ::selection': {
         background: theme.palette.primary[500]
