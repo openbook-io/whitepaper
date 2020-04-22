@@ -80,20 +80,42 @@ function TextLayer(props: Props) {
     handler(selection.isCollapsed, range)
   };
 
+  const hideTipAndSelection = (mousedown: boolean) => {
+    const tipNode = findOrCreateContainerLayer(
+      (textLayerRef.current.parentNode.parentNode as HTMLElement),
+      "PdfHighlighter__tip-layer"
+    );
+
+    const selection: Selection = window.getSelection();
+
+    if (selection.isCollapsed && mousedown) return;
+
+    ReactDom.unmountComponentAtNode(tipNode);
+  };
+
+  const onMouseDown = (event: any) => {
+    if (!(event.target instanceof HTMLElement)) {
+      return;
+    }
+
+    hideTipAndSelection(true);
+  };
+
   useEffect(() => {
     if(textLayerRef.current){
-      textLayerRef.current.addEventListener("selectstart", () => {
+      textLayerRef.current.parentNode.parentNode.addEventListener("selectstart", () => {
         document.addEventListener("selectionchange", onSelectionChange);
       });
 
-      textLayerRef.current.addEventListener("mouseleave", () => {
+      textLayerRef.current.parentNode.parentNode.addEventListener("mouseleave", () => {
         document.removeEventListener("selectionchange", onSelectionChange);
+        hideTipAndSelection(true);
       })
     }
   }, [textLayerRef])
 
   return (
-    <div className={classes.textOuter} ref={textLayerRef} dangerouslySetInnerHTML={{__html: textLayer}} />
+    <div onMouseDown={onMouseDown} className={classes.textOuter} ref={textLayerRef} dangerouslySetInnerHTML={{__html: textLayer}} />
   )
 }
 export default withStyles(style)(TextLayer);

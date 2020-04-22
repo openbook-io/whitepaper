@@ -39,7 +39,7 @@ const styles = (theme: Theme) => createStyles({
         top: 0,
         zIndex: '-1',
         cursor: 'default',
-        userSelect: 'none'
+        userSelect: 'text'
       }
     }
   }
