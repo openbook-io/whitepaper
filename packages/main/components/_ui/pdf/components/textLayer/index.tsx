@@ -101,6 +101,13 @@ function TextLayer(props: Props) {
     hideTipAndSelection(true);
   };
 
+  const onMouseUp = () => {
+    const selection: Selection = window.getSelection();
+    const range = selection.getRangeAt(0);
+
+    if(range.endOffset === 0) selection.empty()
+  }
+
   useEffect(() => {
     if(textLayerRef.current){
       textLayerRef.current.parentNode.parentNode.addEventListener("selectstart", () => {
@@ -115,7 +122,7 @@ function TextLayer(props: Props) {
   }, [textLayerRef])
 
   return (
-    <div onMouseDown={onMouseDown} className={classes.textOuter} ref={textLayerRef} dangerouslySetInnerHTML={{__html: textLayer}} />
+    <div onMouseDown={onMouseDown}  onMouseUp={onMouseUp} className={classes.textOuter} ref={textLayerRef} dangerouslySetInnerHTML={{__html: textLayer}} />
   )
 }
 export default withStyles(style)(TextLayer);
