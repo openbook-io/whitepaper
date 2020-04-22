@@ -20,6 +20,22 @@ export default class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
           />
+          <style jsx>
+          {`
+            @font-face {
+              font-family: 'Merriweather';
+              src: url('/fonts/merriweather/Merriweather-Regular.ttf');
+            }
+            @font-face {
+              font-family: 'Open Sans';
+              src: url('/fonts/open_sans/OpenSans-Regular.ttf');
+            }
+            @font-face {
+              font-family: 'Roboto Mono';
+              src: url('/fonts/roboto_mono/RobotoMono-Regular.ttf');
+            }
+            `}
+          </style>
         </Head>
         <body>
           <Main />
